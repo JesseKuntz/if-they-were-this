@@ -5,18 +5,18 @@ import React from 'react'
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
+      borderBottom: `4px solid hotpink`,
+      marginBottom: `20px`,
     }}
   >
     <div
       style={{
         margin: `0 auto`,
         maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        padding: `20px`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <h1 className="sparkle" style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
