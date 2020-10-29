@@ -91,7 +91,7 @@ button {
 }
 
 .scroll-piece {
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   height: 100vh;
   position: relative;
   scroll-snap-stop: always;
