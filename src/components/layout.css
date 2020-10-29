@@ -62,7 +62,6 @@ button {
   border: 1px solid white;
   border-radius: 20px;
   letter-spacing: 4px;
-  margin-top: 33px;
   cursor: pointer;
 }
 
@@ -74,6 +73,7 @@ button {
 
   h1 {
     font-size: 100px;
+    margin-bottom: 100px;
   }
 
   button {

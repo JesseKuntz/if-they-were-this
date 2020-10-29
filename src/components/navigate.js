@@ -1,21 +1,8 @@
 import React from 'react'
 
-function isSafariOnIOS() {
-  const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)
-  const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-
-  return isSafari && iOS
-}
-
 function scroll() {
-  const { clientHeight } = document.documentElement
-
-  if (isSafariOnIOS()) {
-    return window.scrollBy(0, clientHeight)
-  }
-
   return window.scrollBy({
-    top: clientHeight,
+    top: document.documentElement.clientHeight,
     behavior: 'smooth',
   })
 }
