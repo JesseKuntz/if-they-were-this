@@ -19,7 +19,7 @@ const Header = ({ siteTitle }) => (
         padding: `20px`,
       }}
     >
-      <h1 className="sparkle" style={{ margin: 0 }}>
+      <h1 className="sparkle">
         <Link
           to="/"
           style={{
