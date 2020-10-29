@@ -2,13 +2,16 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Navigate from './navigate'
+
 const Header = ({ siteTitle }) => (
   <header
     style={{
       background: 'hotpink',
-      marginBottom: `20px`,
     }}
+    className="scroll-piece"
   >
+    <Navigate />
     <div
       style={{
         margin: `0 auto`,

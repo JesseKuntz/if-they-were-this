@@ -14,6 +14,7 @@ html {
   letter-spacing: 2px;
   box-sizing: border-box;
   overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -29,21 +30,25 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
   line-height: 1;
+  scroll-snap-type: y mandatory;
 }
 
 h1 {
-  font-size: 100px;
-  -webkit-text-stroke: 1px hotpink;
+  font-size: 200px;
+  text-align: center;
 }
 
 .sparkle {
- -webkit-text-fill-color: transparent;
+ /* If we ever want to add sparkles back in... */
+ /* -webkit-text-fill-color: transparent;
  background: -webkit-linear-gradient(transparent, transparent), url('../images/glitter.gif') repeat;
- -webkit-background-clip: text;
+ -webkit-background-clip: text; */
+ color: white;
 }
 
-p {
+.home-text {
   font-size: 34px;
+  padding: 20px 0;
 }
 
 button {
@@ -67,7 +72,34 @@ button {
     text-align: center;
   }
 
+  h1 {
+    font-size: 100px;
+  }
+
   button {
     width: 100%;
   }
+}
+
+.scroll-piece {
+  scroll-snap-align: start;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  scroll-snap-stop: always;
+}
+
+.navigate-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  font-size: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: scale(1, -1);
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
 }
