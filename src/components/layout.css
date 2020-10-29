@@ -46,7 +46,7 @@ h1 {
  color: white;
 }
 
-.home-text {
+.text {
   font-size: 34px;
   padding: 20px 0;
 }
@@ -81,13 +81,20 @@ button {
   }
 }
 
+.bold-brand {
+  color: hotpink;
+  font-weight: bold;
+}
+
 .scroll-piece {
   scroll-snap-align: start;
   height: 100vh;
-  display: flex;
-  align-items: center;
   position: relative;
   scroll-snap-stop: always;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .navigate-down-arrow {
@@ -102,4 +109,10 @@ button {
   width: 100px;
   text-align: center;
   cursor: pointer;
+}
+
+.quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

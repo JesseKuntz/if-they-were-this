@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
-import Navigate from './navigate'
+import Quiz from './quiz'
 import './layout.css'
 
 const Layout = ({ children }) => {
@@ -35,9 +35,12 @@ const Layout = ({ children }) => {
         }}
         className="scroll-piece"
       >
-        <Navigate />
-        <main>{children}</main>
+        {children}
       </div>
+      <Quiz text={'Quiz 1'} />
+      <Quiz text={'Quiz 2'} />
+      <Quiz text={'Quiz 3'} />
+      <Quiz text={'Quiz 4'} />
     </>
   )
 }
