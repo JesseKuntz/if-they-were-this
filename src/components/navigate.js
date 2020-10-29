@@ -2,7 +2,7 @@ import React from 'react'
 
 function scroll() {
   window.scrollBy({
-    top: 100,
+    top: document.documentElement.clientHeight,
     behavior: 'smooth',
   })
 }

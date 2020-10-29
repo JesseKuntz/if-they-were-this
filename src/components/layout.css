@@ -79,6 +79,10 @@ button {
   button {
     width: 100%;
   }
+
+  .navigate-down-arrow {
+    display: none;
+  }
 }
 
 .bold-brand {
