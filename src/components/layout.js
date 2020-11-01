@@ -26,6 +26,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <div className="turn text">
+        Please turn the screen back to portrait mode to keep playing!
+      </div>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
