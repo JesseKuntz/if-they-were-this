@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   siteMetadata: {
     title: `If They Were This`,
@@ -25,6 +27,17 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'Fauna',
+        fieldName: 'fauna',
+        url: 'https://graphql.fauna.com/graphql',
+        headers: {
+          Authorization: `Bearer ${process.env.FAUNA_SERVER_SECRET}`,
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

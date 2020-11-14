@@ -13,8 +13,8 @@ import Header from './header'
 import Quiz from './quiz'
 import './layout.css'
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
+const Layout = ({ children, data }) => {
+  const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
       <div className="turn text">
         Please turn the screen back to portrait mode to keep playing!
       </div>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header siteTitle={siteData.site.siteMetadata?.title || `Title`} />
       <div
         style={{
           margin: `0 auto`,
@@ -40,16 +40,16 @@ const Layout = ({ children }) => {
       >
         {children}
       </div>
-      <Quiz text={'Quiz 1'} />
-      <Quiz text={'Quiz 2'} />
-      <Quiz text={'Quiz 3'} />
-      <Quiz text={'Quiz 4'} />
+      {data.map(quiz => (
+        <Quiz text={quiz.question} key={quiz.question} />
+      ))}
     </>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default Layout

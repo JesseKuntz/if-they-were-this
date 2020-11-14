@@ -1,13 +1,21 @@
 import React from 'react'
+import { graphql } from 'gatsby'
+import PropTypes from 'prop-types'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
 import { scroll } from '../components/navigate'
 
-const IndexPage = () => {
+const IndexPage = ({
+  data: {
+    fauna: {
+      allQuizzes: { data },
+    },
+  },
+}) => {
   return (
-    <Layout>
+    <Layout data={data}>
       <SEO title="Home" />
       <div className="text">
         <span className="bold-brand">If They Were This</span> is a celebrity
@@ -20,6 +28,24 @@ const IndexPage = () => {
       </div>
     </Layout>
   )
+}
+
+export const query = graphql`
+  {
+    fauna {
+      allQuizzes(_size: 10) {
+        data {
+          question
+          choices
+          image
+        }
+      }
+    }
+  }
+`
+
+IndexPage.propTypes = {
+  data: PropTypes.object,
 }
 
 export default IndexPage

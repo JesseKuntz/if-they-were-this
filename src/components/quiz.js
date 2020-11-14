@@ -7,7 +7,7 @@ const Quiz = ({ text }) => {
   return (
     <div className="scroll-piece quiz">
       <Navigate />
-      <div className="text">{text} ✏️</div>
+      <div className="text">{text}</div>
     </div>
   )
 }

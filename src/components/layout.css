@@ -98,7 +98,7 @@ button {
   padding: 20px;
 }
 
-@media (orientation: landscape) {
+@media only screen and (max-height: 500px) and (orientation: landscape) {
   .turn {
     display: flex;
   }
