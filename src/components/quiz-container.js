@@ -31,6 +31,8 @@ function scrollHandler(getMoreQuizzes, cursor) {
 }
 
 const QuizContainer = ({ data, after }) => {
+  if (!data) return null
+
   const [quizzes, setQuizzes] = useState(data)
   const [cursor, setCursor] = useState(after)
   const cursorRef = useRef(cursor)
