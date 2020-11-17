@@ -134,6 +134,10 @@ button {
   cursor: pointer;
 }
 
+.scroll-piece:last-child .navigate-down-arrow {
+  display: none;
+}
+
 .quiz {
   display: flex;
   justify-content: center;

@@ -15,7 +15,7 @@ const client = new ApolloClient({
   request: operation => {
     operation.setContext({
       headers: {
-        Authorization: `Bearer ${process.env.FAUNA_CLIENT_SECRET}`,
+        Authorization: `Bearer ${process.env.GATSBY_FAUNA_CLIENT_SECRET}`,
       },
     })
   },

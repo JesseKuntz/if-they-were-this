@@ -10,10 +10,10 @@ import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
-import Quiz from './quiz'
+import QuizContainer from './quiz-container'
 import './layout.css'
 
-const Layout = ({ children, data }) => {
+const Layout = ({ children, data, after }) => {
   const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -40,9 +40,7 @@ const Layout = ({ children, data }) => {
       >
         {children}
       </div>
-      {data.map(quiz => (
-        <Quiz text={quiz.question} key={quiz.question} />
-      ))}
+      <QuizContainer data={data} after={after} />
     </>
   )
 }
@@ -50,6 +48,7 @@ const Layout = ({ children, data }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
+  after: PropTypes.string,
 }
 
 export default Layout

@@ -10,12 +10,12 @@ import { scroll } from '../components/navigate'
 const IndexPage = ({
   data: {
     fauna: {
-      allQuizzes: { data },
+      allQuizzes: { data, after },
     },
   },
 }) => {
   return (
-    <Layout data={data}>
+    <Layout data={data} after={after}>
       <SEO title="Home" />
       <div className="text">
         <span className="bold-brand">If They Were This</span> is a celebrity
@@ -39,6 +39,7 @@ export const query = graphql`
           choices
           image
         }
+        after
       }
     }
   }
