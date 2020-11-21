@@ -6,7 +6,7 @@ import { gql } from 'apollo-boost'
 import Quiz from './quiz'
 import './layout.css'
 
-const PAGES_FROM_BOTTOM = 3
+const PAGES_FROM_BOTTOM = 1
 
 const QUIZ_QUERY = gql`
   query Quizzes($cursor: String!) {
