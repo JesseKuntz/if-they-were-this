@@ -6,6 +6,7 @@ import Navigate from './navigate'
 const Quiz = ({ quiz }) => {
   return (
     <div className="scroll-piece quiz">
+      <Navigate up={true} />
       <Navigate />
       <div className="text">{quiz.question}</div>
     </div>

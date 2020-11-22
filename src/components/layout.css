@@ -81,7 +81,7 @@ button {
     width: 100%;
   }
 
-  .navigate-down-arrow {
+  .navigate-arrow {
     display: none;
   }
 }
@@ -120,21 +120,28 @@ button {
   flex-direction: column;
 }
 
-.navigate-down-arrow {
+.navigate-arrow {
   position: absolute;
-  bottom: 30px;
   left: 0;
   right: 0;
   font-size: 100px;
   margin-left: auto;
   margin-right: auto;
-  transform: scale(1, -1);
   width: 100px;
   text-align: center;
   cursor: pointer;
 }
 
-.scroll-piece:last-child .navigate-down-arrow {
+.up {
+  top: 30px;
+}
+
+.down {
+  bottom: 30px;
+  transform: scale(1, -1);
+}
+
+.scroll-piece:last-child .navigate-arrow {
   display: none;
 }
 

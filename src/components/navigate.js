@@ -1,18 +1,33 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-function scroll() {
+function scroll(up) {
   return window.scrollBy({
-    top: document.documentElement.clientHeight,
+    top: document.documentElement.clientHeight * (up ? -1 : 1),
     behavior: 'smooth',
   })
 }
 
-const Navigate = () => {
+function getClass(up) {
+  const baseClass = 'navigate-arrow'
+
+  if (up) {
+    return `${baseClass} up`
+  }
+
+  return `${baseClass} down`
+}
+
+const Navigate = ({ up }) => {
   return (
-    <div className="navigate-down-arrow" onClick={scroll}>
+    <div className={getClass(up)} onClick={() => scroll(up)}>
       ^
     </div>
   )
+}
+
+Navigate.propTypes = {
+  up: PropTypes.bool,
 }
 
 export { scroll }
