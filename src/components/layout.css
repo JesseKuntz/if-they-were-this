@@ -141,7 +141,7 @@ button {
   transform: scale(1, -1);
 }
 
-.scroll-piece:last-child .navigate-arrow {
+.scroll-piece:last-child .navigate-arrow.down {
   display: none;
 }
 
