@@ -145,6 +145,10 @@ button {
   display: none;
 }
 
+.scroll-piece:nth-child(2) .navigate-arrow.down {
+  color: white;
+}
+
 .quiz {
   display: flex;
   justify-content: center;
@@ -170,4 +174,12 @@ button {
   to {
     transform: rotate(359deg);
   }
+}
+
+.final-quiz {
+  position: absolute;
+  bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 24px;
 }
