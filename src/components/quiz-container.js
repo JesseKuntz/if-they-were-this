@@ -30,15 +30,7 @@ function scrollHandler(getMoreQuizzes, cursor) {
   }
 }
 
-const QuizContainer = ({ data, after }) => {
-  if (!data) return null
-
-  const [quizzes, setQuizzes] = useState(data)
-  const [cursor, setCursor] = useState(after)
-  const cursorRef = useRef(cursor)
-
-  const [getMoreQuizzes, { data: newQuizData }] = useLazyQuery(QUIZ_QUERY)
-
+function attachScrollListener({ getMoreQuizzes, cursor, cursorRef }) {
   useEffect(() => {
     if (window.innerHeight + window.scrollY === document.body.offsetHeight) {
       getMoreQuizzes({ variables: { cursor } })
@@ -49,6 +41,31 @@ const QuizContainer = ({ data, after }) => {
     )
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
+}
+
+function getQuizzes(quizzes, loading) {
+  if (!quizzes) {
+    return null
+  }
+
+  return quizzes.map((quiz, index) => {
+    const showLoading = loading && index === quizzes.length - 1
+    return <Quiz quiz={quiz} key={quiz.question} showLoading={showLoading} />
+  })
+}
+
+const QuizContainer = ({ data, after }) => {
+  if (!data) return null
+
+  const [quizzes, setQuizzes] = useState(data)
+  const [cursor, setCursor] = useState(after)
+  const cursorRef = useRef(cursor)
+
+  const [getMoreQuizzes, { data: newQuizData, loading }] = useLazyQuery(
+    QUIZ_QUERY
+  )
+
+  attachScrollListener({ getMoreQuizzes, cursor, cursorRef })
 
   if (newQuizData && newQuizData.allQuizzes.after !== cursor) {
     setQuizzes([...quizzes, ...newQuizData.allQuizzes.data])
@@ -56,13 +73,12 @@ const QuizContainer = ({ data, after }) => {
     setCursor(newQuizData.allQuizzes.after)
   }
 
-  return (
-    quizzes && quizzes.map(quiz => <Quiz quiz={quiz} key={quiz.question} />)
-  )
+  return getQuizzes(quizzes, loading)
 }
 
 QuizContainer.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
+  after: PropTypes.string,
 }
 
 export default QuizContainer
