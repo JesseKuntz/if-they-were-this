@@ -10,7 +10,7 @@ const PAGES_FROM_BOTTOM = 1
 
 const QUIZ_QUERY = gql`
   query Quizzes($cursor: String!) {
-    allQuizzes(_size: 5, _cursor: $cursor) {
+    allQuizzes(_size: 20, _cursor: $cursor) {
       data {
         question
         choices

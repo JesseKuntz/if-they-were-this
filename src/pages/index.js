@@ -33,7 +33,7 @@ const IndexPage = ({
 export const query = graphql`
   {
     fauna {
-      allQuizzes(_size: 10) {
+      allQuizzes(_size: 100) {
         data {
           question
           choices
