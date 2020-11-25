@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Navigate from './navigate'
+import Choice from './choice'
 
 import StarIconImage from '../images/gatsby-icon.png'
 
@@ -19,11 +20,26 @@ function getBottomElement(showLoading, finalQuiz) {
   return <Navigate />
 }
 
+function getImage(url) {
+  return url.replace(/\/v.+?\//g, `/e_trim/`)
+}
+
 const Quiz = ({ quiz, showLoading, finalQuiz }) => {
   return (
     <div className="scroll-piece quiz">
       <Navigate up={true} />
       <div className="text">{quiz.question}</div>
+      <div className="quiz-content">
+        <div className="quiz-image-container">
+          <img className="quiz-image" src={getImage(quiz.image)} />
+        </div>
+        <div className="choices">
+          {quiz.choices.map((choice, index) => (
+            <Choice key={`${choice}:${index}`} text={choice} />
+          ))}
+        </div>
+      </div>
+
       {getBottomElement(showLoading, finalQuiz)}
     </div>
   )
