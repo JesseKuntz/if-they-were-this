@@ -70,8 +70,6 @@ const QuizContainer = ({ data, after }) => {
     QUIZ_QUERY
   )
 
-  attachScrollListener({ getMoreQuizzes, cursorRef })
-
   if (newQuizData && newQuizData.allQuizzes.after !== cursor) {
     setQuizzes([...quizzes, ...newQuizData.allQuizzes.data])
     cursorRef.current = newQuizData.allQuizzes.after

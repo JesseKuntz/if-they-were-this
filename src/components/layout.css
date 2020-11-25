@@ -151,7 +151,6 @@ button {
 .quiz-image {
   object-fit: contain;
   max-width: 100%;
-  max-height: 100%;
   width: auto;
   height: auto;
 }
@@ -234,7 +233,7 @@ button {
 }
 
 /* Touch Styles on a Longer Device */
-@media only screen and (max-width: 480px) and (min-height: 800px) {
+@media only screen and (max-width: 480px) and (min-height: 750px) {
   .choice {
     font-size: 26px;
   }
