@@ -21,7 +21,8 @@ function getBottomElement(showLoading, finalQuiz) {
 }
 
 function getImage(url) {
-  return url.replace(/\/v.+?\//g, `/e_trim/`)
+  const newUrl = url.replace('http', 'https')
+  return newUrl.replace(/\/v.+?\//g, `/e_trim/`)
 }
 
 const Quiz = ({ quiz, showLoading, finalQuiz }) => {
