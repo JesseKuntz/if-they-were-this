@@ -52,7 +52,7 @@ h1 {
   padding: 20px 0;
 }
 
-button {
+.start-button {
   font-family: 'SF Hollywood Hills';
   width: 400px;
   height: 100px;
@@ -165,6 +165,22 @@ button {
   border-radius: 8px;
   padding: 6px;
   margin: 0 8px 8px 0;
+  font-family: 'SF Hollywood Hills';
+  background-color: white;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.choice.clicked.correct {
+  background-color: rgb(0, 255, 0, 0.2);
+}
+
+.choice.clicked.incorrect {
+  background-color: rgb(255, 0, 0, 0.2);
+}
+
+.choice:disabled {
+  color: black;
 }
 
 /* Touch Styles */
@@ -271,6 +287,11 @@ button {
 
   .choice:hover {
     background-color: rgb(255, 105, 180, 0.2);
+  }
+
+  .choice.clicked {
+    background-color: white;
+    cursor: default;
   }
 
   .final-quiz {

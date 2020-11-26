@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Navigate from './navigate'
@@ -25,19 +25,49 @@ function getImage(url) {
   return newUrl.replace(/\/v.+?\//g, `/e_trim/`)
 }
 
+function scrambleChoices(choices) {
+  const choicesWithData = choices.map((choice, index) => ({
+    text: choice,
+    correct: index === 0,
+  }))
+
+  return choicesWithData
+    .map(a => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
+}
+
+function clickHandler(setClicked) {
+  setClicked(true)
+}
+
 const Quiz = ({ quiz, showLoading, finalQuiz }) => {
+  const [clicked, setClicked] = useState()
+  const [choices] = useState(scrambleChoices(quiz.choices))
+
   return (
     <div className="scroll-piece quiz">
       <Navigate up={true} />
       <div className="text">{quiz.question}</div>
       <div className="quiz-content">
         <div className="quiz-image-container">
-          <img className="quiz-image" src={getImage(quiz.image)} />
+          <img
+            className="quiz-image"
+            src={getImage(quiz.image)}
+            loading="lazy"
+          />
         </div>
         <div className="choices">
-          {quiz.choices.map((choice, index) => (
-            <Choice key={`${choice}:${index}`} text={choice} />
-          ))}
+          {choices &&
+            choices.map((choice, index) => (
+              <Choice
+                key={`${choice.text}:${index}`}
+                choice={choice}
+                clicked={clicked}
+                setClicked={setClicked}
+                clickHandler={clickHandler}
+              />
+            ))}
         </div>
       </div>
 

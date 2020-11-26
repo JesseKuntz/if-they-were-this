@@ -22,7 +22,9 @@ const IndexPage = ({
         quiz game.
       </div>
       <div className="text">Put your pop-culture knowledge to the test.</div>
-      <button onClick={() => scroll()}>Start</button>
+      <button className="start-button" onClick={() => scroll()}>
+        Start
+      </button>
       <div className="text">
         ...or if you are on your phone, just keep swiping!
       </div>
