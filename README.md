@@ -1,7 +1,6 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="./src/images/gatsby-icon.png" width="100" />
+  <a href="https://www.iftheywerethis.com">
+    <img alt="If They Were This Logo" src="./src/images/gatsby-icon.png" width="100" />
   </a>
 </p>
 <h1 align="center">
