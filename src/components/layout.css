@@ -40,10 +40,6 @@ h1 {
 }
 
 .sparkle {
- /* If we ever want to add sparkles back in... */
- /* -webkit-text-fill-color: transparent;
- background: -webkit-linear-gradient(transparent, transparent), url('../images/glitter.gif') repeat;
- -webkit-background-clip: text; */
  color: white;
 }
 
