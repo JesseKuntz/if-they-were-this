@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Navigate from './navigate'
 import Choice from './choice'
+import Share from './share'
 
 import StarIconImage from '../images/gatsby-icon.png'
 
@@ -45,9 +46,14 @@ const Quiz = ({ quiz, showLoading, finalQuiz }) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
 
+  if (clicked) {
+    window.history.replaceState(null, null, `?quiz=${quiz._id}`)
+  }
+
   return (
-    <div className="scroll-piece quiz">
+    <div className="scroll-piece quiz" id={quiz._id}>
       <Navigate up={true} />
+      <Share id={quiz._id} />
       <div className="text">{quiz.question}</div>
       <div className="quiz-content">
         <div className="quiz-image-container">

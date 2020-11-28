@@ -179,6 +179,42 @@ h1 {
   color: black;
 }
 
+.share {
+  width: 32px;
+  height: 32px;
+  background: hotpink;
+  padding: 10px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.share-icon {
+  color: white;
+}
+
+.share-container {
+  position: absolute;
+  top: 64px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.copy-message {
+  background: white;
+  line-height: 52px;
+  padding: 0 10px;
+  border: 2px solid hotpink;
+  border-radius: 10px;
+  opacity: 0;
+  cursor: default;
+  transition: opacity 0.5s;
+}
+
+.show {
+  opacity: 1;
+}
+
 /* Touch Styles */
 @media only screen and (max-width: 480px) {
   html {
@@ -219,7 +255,7 @@ h1 {
   }
 
   .quiz .text {
-    padding: 20px 10px;
+    padding: 20px;
   }
 
   .choices {
@@ -296,5 +332,10 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     font-size: 24px;
+  }
+
+  .share-container {
+    top: 30px;
+    left: 30px;
   }
 }

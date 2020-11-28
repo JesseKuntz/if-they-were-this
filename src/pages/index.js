@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 
@@ -14,6 +14,15 @@ const IndexPage = ({
     },
   },
 }) => {
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const quizId = urlParams.get('quiz')
+
+    if (quizId) {
+      document.getElementById(quizId).scrollIntoView()
+    }
+  }, [])
+
   return (
     <Layout data={data} after={after}>
       <SEO title="Home" />
@@ -40,6 +49,7 @@ export const query = graphql`
           question
           choices
           image
+          _id
         }
         after
       }
