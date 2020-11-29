@@ -38,17 +38,17 @@ function scrambleChoices(choices) {
     .map(a => a.value)
 }
 
-function clickHandler(setClicked) {
+function clickHandler(setClicked, id, correct) {
   setClicked(true)
+
+  const results = JSON.parse(window.localStorage.getItem('quiz-results')) || {}
+  results[id] = correct
+  window.localStorage.setItem('quiz-results', JSON.stringify(results))
 }
 
-const Quiz = ({ quiz, showLoading, finalQuiz }) => {
-  const [clicked, setClicked] = useState()
+const Quiz = ({ quiz, showLoading, finalQuiz, completed }) => {
+  const [clicked, setClicked] = useState(completed)
   const [choices] = useState(scrambleChoices(quiz.choices))
-
-  if (clicked) {
-    window.history.replaceState(null, null, `?quiz=${quiz._id}`)
-  }
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
@@ -71,7 +71,9 @@ const Quiz = ({ quiz, showLoading, finalQuiz }) => {
                 choice={choice}
                 clicked={clicked}
                 setClicked={setClicked}
-                clickHandler={clickHandler}
+                clickHandler={() =>
+                  clickHandler(setClicked, quiz._id, choice.correct)
+                }
               />
             ))}
         </div>
@@ -86,6 +88,7 @@ Quiz.propTypes = {
   quiz: PropTypes.object.isRequired,
   showLoading: PropTypes.bool,
   finalQuiz: PropTypes.bool,
+  completed: PropTypes.bool,
 }
 
 export default Quiz

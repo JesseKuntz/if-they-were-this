@@ -12,13 +12,26 @@ function resizeHandler() {
   document.documentElement.style.setProperty('--vh', `${vh}px`)
 }
 
+function getResults() {
+  return JSON.parse(window.localStorage.getItem('quiz-results') || '{}')
+}
+
+function getLastQuizCompleted() {
+  const results = getResults()
+  const quizIds = Reflect.ownKeys(results)
+  return quizIds[quizIds.length - 1]
+}
+
 function scrollToQuiz() {
   const urlParams = new URLSearchParams(window.location.search)
-  const quizId = urlParams.get('quiz')
+  const results = getResults()
+  const quizId = urlParams.get('quiz') || getLastQuizCompleted(results)
 
   if (quizId) {
     document.getElementById(quizId).scrollIntoView()
   }
+
+  return results
 }
 
 const IndexPage = ({
@@ -38,7 +51,7 @@ const IndexPage = ({
   }, [])
 
   return (
-    <Layout data={data} after={after}>
+    <Layout data={data} after={after} results={getResults()}>
       <SEO title="Home" />
       <div className="text">
         <span className="bold-brand">If They Were This</span> is a celebrity

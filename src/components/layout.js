@@ -13,7 +13,7 @@ import Header from './header'
 import QuizContainer from './quiz-container'
 import './layout.css'
 
-const Layout = ({ children, data, after }) => {
+const Layout = ({ children, data, after, results }) => {
   const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -40,7 +40,7 @@ const Layout = ({ children, data, after }) => {
       >
         {children}
       </div>
-      <QuizContainer data={data} after={after} />
+      <QuizContainer data={data} after={after} results={results} />
     </>
   )
 }
@@ -49,6 +49,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
   after: PropTypes.string,
+  results: PropTypes.object,
 }
 
 export default Layout

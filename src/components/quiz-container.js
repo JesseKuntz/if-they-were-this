@@ -39,7 +39,7 @@ function attachScrollListener({ getMoreQuizzes, cursorRef }) {
   }, [])
 }
 
-function getQuizzes({ quizzes, loading, newQuizData }) {
+function getQuizzes({ quizzes, loading, newQuizData, results }) {
   if (!quizzes) {
     return null
   }
@@ -54,12 +54,13 @@ function getQuizzes({ quizzes, loading, newQuizData }) {
         key={quiz.question}
         showLoading={showLoading}
         finalQuiz={finalQuiz}
+        completed={results[quiz._id] !== undefined}
       />
     )
   })
 }
 
-const QuizContainer = ({ data, after }) => {
+const QuizContainer = ({ data, after, results }) => {
   if (!data) return null
 
   const [quizzes, setQuizzes] = useState(data)
@@ -76,12 +77,13 @@ const QuizContainer = ({ data, after }) => {
     setCursor(newQuizData.allQuizzes.after)
   }
 
-  return getQuizzes({ quizzes, loading, newQuizData })
+  return getQuizzes({ quizzes, loading, newQuizData, results })
 }
 
 QuizContainer.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   after: PropTypes.string,
+  results: PropTypes.object,
 }
 
 export default QuizContainer
