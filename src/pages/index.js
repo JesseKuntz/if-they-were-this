@@ -13,6 +13,10 @@ function resizeHandler() {
 }
 
 function getResults() {
+  if (typeof window === 'undefined') {
+    return {}
+  }
+
   return JSON.parse(window.localStorage.getItem('quiz-results') || '{}')
 }
 
