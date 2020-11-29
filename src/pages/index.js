@@ -7,6 +7,20 @@ import SEO from '../components/seo'
 
 import { scroll } from '../components/navigate'
 
+function resizeHandler() {
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
+
+function scrollToQuiz() {
+  const urlParams = new URLSearchParams(window.location.search)
+  const quizId = urlParams.get('quiz')
+
+  if (quizId) {
+    document.getElementById(quizId).scrollIntoView()
+  }
+}
+
 const IndexPage = ({
   data: {
     fauna: {
@@ -15,12 +29,12 @@ const IndexPage = ({
   },
 }) => {
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const quizId = urlParams.get('quiz')
+    resizeHandler()
+    window.addEventListener('resize', resizeHandler)
 
-    if (quizId) {
-      document.getElementById(quizId).scrollIntoView()
-    }
+    scrollToQuiz()
+
+    return () => window.removeEventListener('resize', resizeHandler)
   }, [])
 
   return (
