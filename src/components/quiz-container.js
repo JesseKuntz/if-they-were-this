@@ -1,89 +1,43 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { useLazyQuery } from 'react-apollo'
-import { gql } from 'apollo-boost'
 
 import Quiz from './quiz'
 import './layout.css'
 
-const PAGES_FROM_BOTTOM = 1
+function shuffleArray(array) {
+  const newArray = [...array]
 
-const QUIZ_QUERY = gql`
-  query Quizzes($cursor: String!) {
-    allQuizzes(_size: 20, _cursor: $cursor) {
-      data {
-        question
-        choices
-        image
-      }
-      after
-    }
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
   }
-`
 
-function scrollHandler(getMoreQuizzes, cursor) {
-  if (
-    PAGES_FROM_BOTTOM * window.innerHeight + window.scrollY ===
-    document.body.offsetHeight
-  ) {
-    getMoreQuizzes({ variables: { cursor } })
-  }
+  return newArray
 }
 
-function attachScrollListener({ getMoreQuizzes, cursorRef }) {
-  useEffect(() => {
-    window.addEventListener('scroll', () =>
-      scrollHandler(getMoreQuizzes, cursorRef.current)
-    )
-    return () => window.removeEventListener('scroll', scrollHandler)
-  }, [])
-}
-
-function getQuizzes({ quizzes, loading, newQuizData, results }) {
-  if (!quizzes) {
-    return null
-  }
+function getQuizzes({
+  quizzes: {
+    allQuizzes: { data },
+    quizSize,
+  },
+}) {
+  const quizzes = shuffleArray(data).slice(0, quizSize)
 
   return quizzes.map((quiz, index) => {
-    const showLoading = loading && index === quizzes.length - 1
-    const finalQuiz = !newQuizData && index === quizzes.length - 1
+    const finalQuiz = index === quizzes.length - 1
 
-    return (
-      <Quiz
-        quiz={quiz}
-        key={quiz.question}
-        showLoading={showLoading}
-        finalQuiz={finalQuiz}
-        completed={results[quiz._id] !== undefined}
-      />
-    )
+    return <Quiz quiz={quiz} key={quiz.question} finalQuiz={finalQuiz} />
   })
 }
 
-const QuizContainer = ({ data, after, results }) => {
-  if (!data) return null
+const QuizContainer = ({ quizzes }) => {
+  if (!quizzes) return null
 
-  const [quizzes, setQuizzes] = useState(data)
-  const [cursor, setCursor] = useState(after)
-  const cursorRef = useRef(cursor)
-
-  const [getMoreQuizzes, { data: newQuizData, loading }] = useLazyQuery(
-    QUIZ_QUERY
-  )
-
-  if (newQuizData && newQuizData.allQuizzes.after !== cursor) {
-    setQuizzes([...quizzes, ...newQuizData.allQuizzes.data])
-    cursorRef.current = newQuizData.allQuizzes.after
-    setCursor(newQuizData.allQuizzes.after)
-  }
-
-  return getQuizzes({ quizzes, loading, newQuizData, results })
+  return getQuizzes({ quizzes })
 }
 
 QuizContainer.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
-  after: PropTypes.string,
-  results: PropTypes.object,
+  quizzes: PropTypes.object,
 }
 
 export default QuizContainer

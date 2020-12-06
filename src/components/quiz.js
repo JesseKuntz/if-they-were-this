@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Navigate from './navigate'
 import Choice from './choice'
-import Share from './share'
+// import Share from './share'
 
 import StarIconImage from '../images/gatsby-icon.png'
 
@@ -46,14 +46,14 @@ function clickHandler(setClicked, id, correct) {
   window.localStorage.setItem('quiz-results', JSON.stringify(results))
 }
 
-const Quiz = ({ quiz, showLoading, finalQuiz, completed }) => {
-  const [clicked, setClicked] = useState(completed)
+const Quiz = ({ quiz, showLoading, finalQuiz }) => {
+  const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
       <Navigate up={true} />
-      <Share id={quiz._id} />
+      {/* <Share id={quiz._id} /> */}
       <div className="text">{quiz.question}</div>
       <div className="quiz-content">
         <div className="quiz-image-container">
@@ -88,7 +88,6 @@ Quiz.propTypes = {
   quiz: PropTypes.object.isRequired,
   showLoading: PropTypes.bool,
   finalQuiz: PropTypes.bool,
-  completed: PropTypes.bool,
 }
 
 export default Quiz

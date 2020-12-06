@@ -8,19 +8,23 @@ function scroll(up) {
   })
 }
 
-function getClass(up) {
+function getClass(up, start) {
   const baseClass = 'navigate-arrow'
 
   if (up) {
     return `${baseClass} up`
   }
 
+  if (start) {
+    return `${baseClass} down start`
+  }
+
   return `${baseClass} down`
 }
 
-const Navigate = ({ up }) => {
+const Navigate = ({ up, start }) => {
   return (
-    <div className={getClass(up)} onClick={() => scroll(up)}>
+    <div className={getClass(up, start)} onClick={() => scroll(up)}>
       ^
     </div>
   )
@@ -28,6 +32,7 @@ const Navigate = ({ up }) => {
 
 Navigate.propTypes = {
   up: PropTypes.bool,
+  start: PropTypes.bool,
 }
 
 export { scroll }

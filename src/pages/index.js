@@ -1,92 +1,115 @@
-import React, { useEffect } from 'react'
-import { graphql } from 'gatsby'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useLazyQuery } from 'react-apollo'
+import { gql } from 'apollo-boost'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import GenerateQuizzesButton from '../components/generate-quizzes-button'
+import Navigate from '../components/navigate'
 
-import { scroll } from '../components/navigate'
+import StarIconImage from '../images/gatsby-icon.png'
+
+const QUIZ_SIZES = [10, 25, 50, 100]
+
+const QUIZ_QUERY = gql`
+  query Quizzes {
+    allQuizzes(_size: 100) {
+      data {
+        question
+        choices
+        image
+        name
+        _id
+      }
+      after
+    }
+  }
+`
 
 function resizeHandler() {
   const vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`)
 }
 
-function getResults() {
-  if (typeof window === 'undefined') {
-    return {}
+function resetResults() {
+  window.localStorage.setItem('quiz-results', '{}')
+}
+
+function getGenerateQuizzesButtons({ getQuizzes, sizes, setQuizSize }) {
+  return sizes.map(size => (
+    <GenerateQuizzesButton
+      getQuizzes={getQuizzes}
+      size={size}
+      setQuizSize={setQuizSize}
+      key={size}
+    />
+  ))
+}
+
+function getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize }) {
+  if (loading) {
+    return <img src={StarIconImage} className="loading-indicator" />
   }
 
-  return JSON.parse(window.localStorage.getItem('quiz-results') || '{}')
-}
-
-function getLastQuizCompleted() {
-  const results = getResults()
-  const quizIds = Reflect.ownKeys(results)
-  return quizIds[quizIds.length - 1]
-}
-
-function scrollToQuiz() {
-  const urlParams = new URLSearchParams(window.location.search)
-  const results = getResults()
-  const quizId = urlParams.get('quiz') || getLastQuizCompleted(results)
-
-  if (quizId) {
-    document.getElementById(quizId).scrollIntoView()
+  if (quizzes) {
+    return (
+      <>
+        <div className="text">Your quiz awaits, scroll away!</div>
+        <Navigate start={true} />
+      </>
+    )
   }
 
-  return results
+  return (
+    <>
+      <div className="text">
+        Pick the number of questions you want in your quiz:
+      </div>
+      <div className="quiz-size-button-container">
+        {getGenerateQuizzesButtons({
+          getQuizzes,
+          sizes: QUIZ_SIZES,
+          setQuizSize,
+        })}
+      </div>
+    </>
+  )
 }
 
-const IndexPage = ({
-  data: {
-    fauna: {
-      allQuizzes: { data, after },
-    },
-  },
-}) => {
+const IndexPage = () => {
+  const [quizSize, setQuizSize] = useState()
+
   useEffect(() => {
     resizeHandler()
     window.addEventListener('resize', resizeHandler)
 
-    scrollToQuiz()
+    resetResults()
 
     return () => window.removeEventListener('resize', resizeHandler)
   }, [])
 
+  const [getQuizzes, { data: quizzes, loading }] = useLazyQuery(QUIZ_QUERY)
+
+  let quizData
+  if (quizzes) {
+    quizData = {
+      ...quizzes,
+      quizSize,
+    }
+  }
+
   return (
-    <Layout data={data} after={after} results={getResults()}>
+    <Layout quizzes={quizData}>
       <SEO title="Home" />
       <div className="text">
         <span className="bold-brand">If They Were This</span> is a celebrity
         quiz game.
       </div>
-      <div className="text">Put your pop-culture knowledge to the test.</div>
-      <button className="start-button" onClick={() => scroll()}>
-        Start
-      </button>
-      <div className="text">
-        ...or if you are on your phone, just keep swiping!
-      </div>
+      {getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize })}
     </Layout>
   )
 }
-
-export const query = graphql`
-  {
-    fauna {
-      allQuizzes(_size: 100) {
-        data {
-          question
-          choices
-          image
-          _id
-        }
-        after
-      }
-    }
-  }
-`
 
 IndexPage.propTypes = {
   data: PropTypes.object,

@@ -11,9 +11,11 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import QuizContainer from './quiz-container'
+// import ResultsPage from './results-page'
+
 import './layout.css'
 
-const Layout = ({ children, data, after, results }) => {
+const Layout = ({ children, quizzes }) => {
   const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -40,16 +42,15 @@ const Layout = ({ children, data, after, results }) => {
       >
         {children}
       </div>
-      <QuizContainer data={data} after={after} results={results} />
+      <QuizContainer quizzes={quizzes} />
+      {/* <ResultsPage quizzes={quizzes} /> */}
     </>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object),
-  after: PropTypes.string,
-  results: PropTypes.object,
+  quizzes: PropTypes.object,
 }
 
 export default Layout
