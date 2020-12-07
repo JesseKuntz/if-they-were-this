@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import * as clipboard from 'clipboard-polyfill/text'
 
 function clickHandler(id, setCopied) {
-  window.history.replaceState(null, null, `?quiz=${id}`)
+  const textToWrite = `${window.location.href}quiz/${id}`
 
-  clipboard.writeText(window.location.href)
+  clipboard.writeText(textToWrite)
 
   setCopied(true)
 
@@ -28,7 +28,7 @@ function Share({ id }) {
   const [copied, setCopied] = useState()
 
   return (
-    <div className="share-container">
+    <div className="icon-container">
       <div className="share" onClick={() => clickHandler(id, setCopied)}>
         <svg
           aria-hidden="true"

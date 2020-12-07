@@ -146,6 +146,14 @@ h1 {
   animation: rotation .7s infinite linear;
 }
 
+.loading-indicator.centered {
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  height: 200px;
+  width: 200px;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -190,6 +198,12 @@ h1 {
   color: black;
 }
 
+.home-link {
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+}
+
 .share {
   width: 32px;
   height: 32px;
@@ -203,7 +217,7 @@ h1 {
   color: white;
 }
 
-.share-container {
+.icon-container {
   position: absolute;
   top: 64px;
   left: 20px;
@@ -359,7 +373,7 @@ h1 {
     font-size: 24px;
   }
 
-  .share-container {
+  .icon-container {
     top: 40px;
     left: 40px;
   }

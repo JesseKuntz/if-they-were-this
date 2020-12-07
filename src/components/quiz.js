@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 
 import Navigate from './navigate'
 import Choice from './choice'
-// import Share from './share'
+import Share from './share'
 
 import StarIconImage from '../images/gatsby-icon.png'
 
-function getBottomElement(showLoading, finalQuiz) {
+function getBottomElement({ showLoading, finalQuiz, singleQuiz }) {
+  if (singleQuiz) {
+    return null
+  }
+
   if (showLoading) {
     return <img src={StarIconImage} className="loading-indicator" />
   }
@@ -38,22 +42,25 @@ function scrambleChoices(choices) {
     .map(a => a.value)
 }
 
-function clickHandler(setClicked, id, correct) {
+function clickHandler({ setClicked, id, correct, singleQuiz }) {
   setClicked(true)
 
-  const results = JSON.parse(window.localStorage.getItem('quiz-results')) || {}
-  results[id] = correct
-  window.localStorage.setItem('quiz-results', JSON.stringify(results))
+  if (!singleQuiz) {
+    const results =
+      JSON.parse(window.localStorage.getItem('quiz-results')) || {}
+    results[id] = correct
+    window.localStorage.setItem('quiz-results', JSON.stringify(results))
+  }
 }
 
-const Quiz = ({ quiz, showLoading, finalQuiz }) => {
+const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz }) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
-      <Navigate up={true} />
-      {/* <Share id={quiz._id} /> */}
+      {!singleQuiz && <Navigate up={true} />}
+      <Share id={quiz._id} />
       <div className="text">{quiz.question}</div>
       <div className="quiz-content">
         <div className="quiz-image-container">
@@ -72,14 +79,19 @@ const Quiz = ({ quiz, showLoading, finalQuiz }) => {
                 clicked={clicked}
                 setClicked={setClicked}
                 clickHandler={() =>
-                  clickHandler(setClicked, quiz._id, choice.correct)
+                  clickHandler({
+                    setClicked,
+                    id: quiz._id,
+                    correct: choice.correct,
+                    singleQuiz,
+                  })
                 }
               />
             ))}
         </div>
       </div>
 
-      {getBottomElement(showLoading, finalQuiz)}
+      {getBottomElement({ showLoading, finalQuiz, singleQuiz })}
     </div>
   )
 }
@@ -88,6 +100,7 @@ Quiz.propTypes = {
   quiz: PropTypes.object.isRequired,
   showLoading: PropTypes.bool,
   finalQuiz: PropTypes.bool,
+  singleQuiz: PropTypes.bool,
 }
 
 export default Quiz

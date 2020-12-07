@@ -2,12 +2,14 @@ import React from 'react'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import HomeLink from '../components/home-link'
 
 const NotFoundPage = () => (
-  <Layout>
+  <Layout hideSplash={true}>
     <SEO title="404: Not found" />
+    <HomeLink />
     <h1>404: Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness 😿</p>
+    <p className="text">No quizzes here!</p>
   </Layout>
 )
 

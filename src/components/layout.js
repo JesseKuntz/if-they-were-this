@@ -15,7 +15,7 @@ import QuizContainer from './quiz-container'
 
 import './layout.css'
 
-const Layout = ({ children, quizzes }) => {
+const Layout = ({ children, quizzes, hideSplash }) => {
   const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -31,7 +31,9 @@ const Layout = ({ children, quizzes }) => {
       <div className="turn text">
         Please turn the screen back to portrait mode to keep playing!
       </div>
-      <Header siteTitle={siteData.site.siteMetadata?.title || `Title`} />
+      {!hideSplash && (
+        <Header siteTitle={siteData.site.siteMetadata?.title || `Title`} />
+      )}
       <div
         style={{
           margin: `0 auto`,
@@ -51,6 +53,7 @@ const Layout = ({ children, quizzes }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   quizzes: PropTypes.object,
+  hideSplash: PropTypes.bool,
 }
 
 export default Layout

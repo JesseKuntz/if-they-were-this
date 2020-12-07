@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLazyQuery } from 'react-apollo'
 import { gql } from 'apollo-boost'
@@ -9,6 +9,8 @@ import GenerateQuizzesButton from '../components/generate-quizzes-button'
 import Navigate from '../components/navigate'
 
 import StarIconImage from '../images/gatsby-icon.png'
+
+import { useResizeHandler } from '../support/use-resize-handler'
 
 const QUIZ_SIZES = [10, 25, 50, 100]
 
@@ -22,15 +24,9 @@ const QUIZ_QUERY = gql`
         name
         _id
       }
-      after
     }
   }
 `
-
-function resizeHandler() {
-  const vh = window.innerHeight * 0.01
-  document.documentElement.style.setProperty('--vh', `${vh}px`)
-}
 
 function resetResults() {
   window.localStorage.setItem('quiz-results', '{}')
@@ -80,14 +76,7 @@ function getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize }) {
 const IndexPage = () => {
   const [quizSize, setQuizSize] = useState()
 
-  useEffect(() => {
-    resizeHandler()
-    window.addEventListener('resize', resizeHandler)
-
-    resetResults()
-
-    return () => window.removeEventListener('resize', resizeHandler)
-  }, [])
+  useResizeHandler(resetResults)
 
   const [getQuizzes, { data: quizzes, loading }] = useLazyQuery(QUIZ_QUERY)
 
