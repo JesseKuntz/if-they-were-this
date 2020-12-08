@@ -59,8 +59,12 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz }) => {
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
-      {!singleQuiz && <Navigate up={true} />}
-      <Share id={quiz._id} />
+      {!singleQuiz && (
+        <>
+          <Navigate up={true} /> <Share id={quiz._id} />
+        </>
+      )}
+
       <div className="text">{quiz.question}</div>
       <div className="quiz-content">
         <div className="quiz-image-container">
