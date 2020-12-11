@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import * as clipboard from 'clipboard-polyfill/text'
 
-function clickHandler(id, setCopied) {
-  const textToWrite = `${window.location.href}quiz/${id}`
+import { slugify } from '../support/slugify'
+
+function clickHandler(name, setCopied) {
+  const textToWrite = `${window.location.href}quiz/${slugify(name)}`
 
   clipboard.writeText(textToWrite)
 
@@ -24,12 +26,12 @@ function getClass(copied) {
   return baseClass
 }
 
-function Share({ id }) {
+function Share({ name }) {
   const [copied, setCopied] = useState()
 
   return (
     <div className="icon-container">
-      <div className="share" onClick={() => clickHandler(id, setCopied)}>
+      <div className="share" onClick={() => clickHandler(name, setCopied)}>
         <svg
           aria-hidden="true"
           focusable="false"
@@ -49,7 +51,7 @@ function Share({ id }) {
 }
 
 Share.propTypes = {
-  id: PropTypes.string,
+  name: PropTypes.string,
 }
 
 export default Share

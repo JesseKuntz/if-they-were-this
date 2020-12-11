@@ -4,6 +4,8 @@
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
 
+import { slugify } from './src/support/slugify'
+
 async function createPages({ actions, graphql }) {
   const { data } = await graphql(`
     {
@@ -13,6 +15,7 @@ async function createPages({ actions, graphql }) {
             question
             choices
             image
+            name
             _id
           }
         }
@@ -21,9 +24,10 @@ async function createPages({ actions, graphql }) {
   `)
 
   data.fauna.allQuizzes.data.forEach(quiz => {
-    const id = quiz._id
+    const slug = slugify(quiz.name)
+
     actions.createPage({
-      path: `/quiz/${id}`,
+      path: `/quiz/${slug}`.replace(/\/\/+/g, '/'),
       component: require.resolve(`./src/components/quiz-page.js`),
       context: quiz,
     })

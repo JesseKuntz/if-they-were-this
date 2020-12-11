@@ -61,7 +61,7 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz }) => {
     <div className="scroll-piece quiz" id={quiz._id}>
       {!singleQuiz && (
         <>
-          <Navigate up={true} /> <Share id={quiz._id} />
+          <Navigate up={true} /> <Share name={quiz.name} />
         </>
       )}
 
