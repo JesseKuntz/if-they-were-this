@@ -5,4 +5,4 @@ const slugify = str => {
     .replace(/(^-|-$)+/g, '')
 }
 
-export { slugify }
+exports.slugify = slugify

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import SEO from './seo'
 import Quiz from './quiz'
 import HomeLink from './home-link'
 
@@ -13,6 +14,10 @@ const QuizPage = quiz => {
 
   return (
     <>
+      <SEO
+        title={`If They Were This | ${quiz.pageContext.name}`}
+        description={`Pick what you think ${quiz.pageContext.name} is the most like!`}
+      />
       <Quiz quiz={quiz.pageContext} singleQuiz={true} />
       <HomeLink />
     </>

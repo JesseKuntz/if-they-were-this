@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
 
-import { slugify } from './src/support/slugify'
+const { slugify } = require('./src/support/slugify')
 
 async function createPages({ actions, graphql }) {
   const { data } = await graphql(`

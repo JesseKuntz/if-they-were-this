@@ -90,7 +90,7 @@ const IndexPage = () => {
 
   return (
     <Layout quizzes={quizData}>
-      <SEO title="Home" />
+      <SEO />
       <div className="text">
         <span className="bold-brand">If They Were This</span> is a celebrity
         quiz game.
