@@ -46,13 +46,5 @@ module.exports = {
         uri: 'https://example.com/graphql',
       },
     },
-    {
-      resolve: 'gatsby-plugin-google-tagmanager',
-      options: {
-        id: 'G-11NTE19852',
-        includeInDevelopment: true,
-        defaultDataLayer: { platform: 'gatsby' },
-      },
-    },
   ],
 }
