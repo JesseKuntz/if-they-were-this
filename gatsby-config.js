@@ -46,11 +46,12 @@ module.exports = {
         uri: 'https://example.com/graphql',
       },
     },
-    `gatsby-plugin-offline`,
     {
-      resolve: `gatsby-plugin-google-gtag`,
+      resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        trackingIds: ['256070774'],
+        id: 'G-11NTE19852',
+        includeInDevelopment: true,
+        defaultDataLayer: { platform: 'gatsby' },
       },
     },
   ],
