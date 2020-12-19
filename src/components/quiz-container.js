@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import Quiz from './quiz'
@@ -26,12 +26,18 @@ function getQuizzes({
   return quizzes.map((quiz, index) => {
     const finalQuiz = index === quizzes.length - 1
 
-    return <Quiz quiz={quiz} key={quiz.question} finalQuiz={finalQuiz} />
+    return (
+      <Quiz quiz={quiz} key={quiz.question} finalQuiz={finalQuiz} lazy={true} />
+    )
   })
 }
 
 const QuizContainer = ({ quizzes }) => {
   if (!quizzes) return null
+
+  useEffect(() => {
+    window.lazyLoadInstance.update()
+  })
 
   return getQuizzes({ quizzes })
 }

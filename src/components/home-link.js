@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link } from 'gatsby'
 
-import StarIconImage from '../images/gatsby-icon.png'
+import StarIconImage from '../images/icon-small.png'
 
 const HomeLink = () => (
   <div className="icon-container">

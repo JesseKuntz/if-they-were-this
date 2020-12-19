@@ -5,7 +5,7 @@ import Navigate from './navigate'
 import Choice from './choice'
 import Share from './share'
 
-import StarIconImage from '../images/gatsby-icon.png'
+import StarIconImage from '../images/icon.png'
 
 function getBottomElement({ showLoading, finalQuiz, singleQuiz }) {
   if (singleQuiz) {
@@ -25,7 +25,7 @@ function getBottomElement({ showLoading, finalQuiz, singleQuiz }) {
   return <Navigate />
 }
 
-function getImage(url) {
+function getImageSrc(url) {
   const newUrl = url.replace('http', 'https')
   return newUrl.replace(/\/v.+?\//g, `/e_trim/`)
 }
@@ -53,7 +53,17 @@ function clickHandler({ setClicked, id, correct, singleQuiz }) {
   }
 }
 
-const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz }) => {
+function getImage(src, lazy) {
+  const baseClass = 'quiz-image'
+
+  if (lazy) {
+    return <img className={`${baseClass} lazy`} data-src={src} />
+  }
+
+  return <img className={baseClass} src={src} />
+}
+
+const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
 
@@ -68,11 +78,7 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz }) => {
       <div className="text">{quiz.question}</div>
       <div className="quiz-content">
         <div className="quiz-image-container">
-          <img
-            className="quiz-image"
-            src={getImage(quiz.image)}
-            loading="lazy"
-          />
+          {getImage(getImageSrc(quiz.image), lazy)}
         </div>
         <div className="choices">
           {choices &&
@@ -105,6 +111,7 @@ Quiz.propTypes = {
   showLoading: PropTypes.bool,
   finalQuiz: PropTypes.bool,
   singleQuiz: PropTypes.bool,
+  lazy: PropTypes.bool,
 }
 
 export default Quiz

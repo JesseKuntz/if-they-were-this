@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.iftheywerethis.com">
-    <img alt="If They Were This Logo" src="./src/images/gatsby-icon.png" width="100" />
+    <img alt="If They Were This Logo" src="./src/images/icon.png" width="100" />
   </a>
 </p>
 <h1 align="center">

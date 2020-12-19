@@ -4,11 +4,11 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 
-import smoothscroll from 'smoothscroll-polyfill'
-
 import React from 'react'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
+import smoothscroll from 'smoothscroll-polyfill'
+import LazyLoad from 'vanilla-lazyload'
 
 const client = new ApolloClient({
   uri: 'https://graphql.fauna.com/graphql',
@@ -27,6 +27,7 @@ const wrapRootElement = ({ element }) => (
 
 function onClientEntry() {
   smoothscroll.polyfill()
+  window.lazyLoadInstance = new LazyLoad()
 }
 
 export { onClientEntry, wrapRootElement }
