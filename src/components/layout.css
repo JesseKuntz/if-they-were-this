@@ -170,6 +170,17 @@ h1 {
   height: auto;
 }
 
+.grade {
+  position: absolute;
+  font-size: 42px;
+  z-index: -1;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
 .choice {
   display: flex;
   align-items: center;

@@ -82,8 +82,6 @@ const IndexPage = () => {
 
   let quizData
   if (quizzes) {
-    window.lazyLoadInstance.update()
-
     quizData = {
       ...quizzes,
       quizSize,

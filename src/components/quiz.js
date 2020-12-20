@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import LazyLoad from 'vanilla-lazyload'
 
 import Navigate from './navigate'
 import Choice from './choice'
 import Share from './share'
 
 import StarIconImage from '../images/icon.png'
+
+const EMOJI_COUNT = 100
+const EMOJI_PADDING = 44
 
 function getBottomElement({ showLoading, finalQuiz, singleQuiz }) {
   if (singleQuiz) {
@@ -42,14 +46,17 @@ function scrambleChoices(choices) {
     .map(a => a.value)
 }
 
-function clickHandler({ setClicked, id, correct, singleQuiz }) {
+function clickHandler({ setClicked, id, correct, singleQuiz, setCorrect }) {
   setClicked(true)
+  setCorrect(correct)
 
   if (!singleQuiz) {
     const results =
       JSON.parse(window.localStorage.getItem('quiz-results')) || {}
     results[id] = correct
     window.localStorage.setItem('quiz-results', JSON.stringify(results))
+
+    LazyLoad.load(document.querySelector('.quiz-image:not(.loaded)'))
   }
 }
 
@@ -63,9 +70,42 @@ function getImage(src, lazy) {
   return <img className={baseClass} src={src} />
 }
 
+function getGrades(correct) {
+  if (correct === undefined) {
+    return null
+  }
+
+  const yPositions = Array.from({ length: EMOJI_COUNT }, () =>
+    Math.floor(Math.random() * (window.innerHeight - EMOJI_PADDING))
+  )
+  const xPositions = Array.from({ length: EMOJI_COUNT }, () =>
+    Math.floor(Math.random() * (window.innerWidth - EMOJI_PADDING))
+  )
+  const fadeValues = Array.from(
+    { length: EMOJI_COUNT },
+    () => Math.random() * 2.5
+  )
+
+  return yPositions.map((y, index) => {
+    const x = xPositions[index]
+    const fade = fadeValues[index]
+
+    return (
+      <div
+        className="grade"
+        style={{ left: x, top: y, animation: `fade ${fade}s forwards` }}
+        key={`${x}:${y}`}
+      >
+        {correct ? '💋' : '❌'}
+      </div>
+    )
+  })
+}
+
 const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
+  const [correct, setCorrect] = useState()
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
@@ -91,6 +131,7 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
                 clickHandler={() =>
                   clickHandler({
                     setClicked,
+                    setCorrect,
                     id: quiz._id,
                     correct: choice.correct,
                     singleQuiz,
@@ -102,6 +143,8 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
       </div>
 
       {getBottomElement({ showLoading, finalQuiz, singleQuiz })}
+
+      {getGrades(correct)}
     </div>
   )
 }
