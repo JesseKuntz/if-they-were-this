@@ -56,7 +56,10 @@ function clickHandler({ setClicked, id, correct, singleQuiz, setCorrect }) {
     results[id] = correct
     window.localStorage.setItem('quiz-results', JSON.stringify(results))
 
-    LazyLoad.load(document.querySelector('.quiz-image:not(.loaded)'))
+    const nextImage = document.querySelector('.quiz-image.lazy:not(.loaded)')
+    if (nextImage) {
+      LazyLoad.load(nextImage)
+    }
   }
 }
 

@@ -24,10 +24,16 @@ function getQuizzes({
   const quizzes = shuffleArray(data).slice(0, quizSize)
 
   return quizzes.map((quiz, index) => {
+    const firstQuiz = index === 0
     const finalQuiz = index === quizzes.length - 1
 
     return (
-      <Quiz quiz={quiz} key={quiz.question} finalQuiz={finalQuiz} lazy={true} />
+      <Quiz
+        quiz={quiz}
+        key={quiz.question}
+        finalQuiz={finalQuiz}
+        lazy={!firstQuiz}
+      />
     )
   })
 }
