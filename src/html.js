@@ -7,19 +7,15 @@ export default function HTML(props) {
       <head>
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-11NTE19852"
+          src="https://www.googletagmanager.com/gtag/js?id=UA-102468458-2"
         ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                if (typeof window !== 'undefined') {
-                  dataLayer.push(arguments);
-                }
-              }
+              function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-11NTE19852');
+              gtag('config', 'UA-102468458-2');
             `,
           }}
         />
