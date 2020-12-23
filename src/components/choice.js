@@ -15,7 +15,20 @@ function getClass(clicked, correct) {
   return baseClass
 }
 
-function Choice({ choice, clicked, setClicked, clickHandler }) {
+function Choice({ choice, clicked, setClicked, clickHandler, refToUse }) {
+  if (choice.correct) {
+    return (
+      <button
+        className={getClass(clicked, choice.correct)}
+        onClick={() => clickHandler(setClicked)}
+        disabled={clicked}
+        ref={refToUse}
+      >
+        {choice.text}
+      </button>
+    )
+  }
+
   return (
     <button
       className={getClass(clicked, choice.correct)}
@@ -32,6 +45,7 @@ Choice.propTypes = {
   clicked: PropTypes.bool,
   setClicked: PropTypes.func,
   clickHandler: PropTypes.func.isRequired,
+  refToUse: PropTypes.object,
 }
 
 export default Choice

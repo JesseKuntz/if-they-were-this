@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import LazyLoad from 'vanilla-lazyload'
 
@@ -40,9 +40,25 @@ function scrambleChoices(choices) {
     .map(a => a.value)
 }
 
-function clickHandler({ setClicked, id, correct, singleQuiz, setCorrect }) {
+function clickHandler({
+  setClicked,
+  id,
+  correct,
+  singleQuiz,
+  setCorrect,
+  choicesContainer,
+  correctChoice,
+}) {
   setClicked(true)
   setCorrect(correct)
+
+  const gap = window.innerWidth - correctChoice.current.offsetWidth
+
+  choicesContainer.current.scrollTo({
+    top: 0,
+    left: correctChoice.current.offsetLeft - gap / 2,
+    behavior: 'smooth',
+  })
 
   if (!singleQuiz) {
     const results =
@@ -103,6 +119,8 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
   const [correct, setCorrect] = useState()
+  const choicesContainer = useRef(null)
+  const correctChoice = useRef(null)
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
@@ -117,10 +135,11 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
         <div className="quiz-image-container">
           {getImage(getImageSrc(quiz.image), lazy)}
         </div>
-        <div className="choices">
+        <div className="choices" ref={choicesContainer}>
           {choices &&
             choices.map((choice, index) => (
               <Choice
+                refToUse={correctChoice}
                 key={`${choice.text}:${index}`}
                 choice={choice}
                 clicked={clicked}
@@ -132,6 +151,8 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
                     id: quiz._id,
                     correct: choice.correct,
                     singleQuiz,
+                    choicesContainer,
+                    correctChoice,
                   })
                 }
               />
