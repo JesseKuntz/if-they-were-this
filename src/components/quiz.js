@@ -6,18 +6,12 @@ import Navigate from './navigate'
 import Choice from './choice'
 import Share from './share'
 
-import StarIconImage from '../images/icon.png'
-
 const EMOJI_COUNT = 100
 const EMOJI_PADDING = 44
 
-function getBottomElement({ showLoading, finalQuiz, singleQuiz }) {
+function getBottomElement({ finalQuiz, singleQuiz }) {
   if (singleQuiz) {
     return null
-  }
-
-  if (showLoading) {
-    return <img src={StarIconImage} className="loading-indicator" />
   }
 
   if (finalQuiz) {

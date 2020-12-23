@@ -8,7 +8,7 @@ import SEO from '../components/seo'
 import GenerateQuizzesButton from '../components/generate-quizzes-button'
 import Navigate from '../components/navigate'
 
-import StarIconImage from '../images/icon.png'
+import StarIconImage from '../images/icon.svg'
 
 import { useResizeHandler } from '../support/use-resize-handler'
 
