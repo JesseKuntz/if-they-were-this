@@ -6,6 +6,8 @@ import Navigate from './navigate'
 import Choice from './choice'
 import Share from './share'
 
+import { getScrollbarWidth } from '../support/get-scrollbar-width'
+
 const EMOJI_COUNT = 100
 const EMOJI_PADDING = 44
 
@@ -88,11 +90,15 @@ function getGrades(correct) {
     return null
   }
 
+  const scrollbarWidth = getScrollbarWidth()
+
   const yPositions = Array.from({ length: EMOJI_COUNT }, () =>
     Math.floor(Math.random() * (window.innerHeight - EMOJI_PADDING))
   )
   const xPositions = Array.from({ length: EMOJI_COUNT }, () =>
-    Math.floor(Math.random() * (window.innerWidth - EMOJI_PADDING))
+    Math.floor(
+      Math.random() * (window.innerWidth - EMOJI_PADDING - scrollbarWidth)
+    )
   )
   const fadeValues = Array.from(
     { length: EMOJI_COUNT },

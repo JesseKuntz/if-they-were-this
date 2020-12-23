@@ -173,6 +173,7 @@ h1 {
 .grade {
   position: absolute;
   font-size: 42px;
+  z-index: -1;
 }
 
 @keyframes fade {
