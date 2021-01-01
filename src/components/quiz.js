@@ -10,6 +10,7 @@ import { getScrollbarWidth } from '../support/get-scrollbar-width'
 
 const EMOJI_COUNT = 100
 const EMOJI_PADDING = 44
+const MAX_FADE = 2
 
 function getBottomElement({ finalQuiz, singleQuiz }) {
   if (singleQuiz) {
@@ -93,8 +94,8 @@ function getImage(src, lazy) {
   return <img className={baseClass} src={src} />
 }
 
-function getGrades(correct) {
-  if (correct === undefined) {
+function getGrades(correct, explosionTriggered, setExplosionTriggered) {
+  if (correct === undefined || explosionTriggered) {
     return null
   }
 
@@ -110,8 +111,10 @@ function getGrades(correct) {
   )
   const fadeValues = Array.from(
     { length: EMOJI_COUNT },
-    () => Math.random() * 2.5
+    () => Math.random() * MAX_FADE
   )
+
+  setTimeout(() => setExplosionTriggered(true), MAX_FADE * 1000)
 
   return yPositions.map((y, index) => {
     const x = xPositions[index]
@@ -141,6 +144,7 @@ const Quiz = ({
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
   const [correct, setCorrect] = useState()
+  const [explosionTriggered, setExplosionTriggered] = useState(false)
   const choicesContainer = useRef(null)
   const correctChoice = useRef(null)
 
@@ -186,7 +190,7 @@ const Quiz = ({
 
       {getBottomElement({ showLoading, finalQuiz, singleQuiz })}
 
-      {getGrades(correct)}
+      {getGrades(correct, explosionTriggered, setExplosionTriggered)}
     </div>
   )
 }
