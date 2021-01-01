@@ -18,7 +18,13 @@ function getBottomElement({ finalQuiz, singleQuiz }) {
 
   if (finalQuiz) {
     return (
-      <div className="final-quiz">🎉 You have reached the final quiz 🎉</div>
+      <>
+        <div className="final-quiz">
+          🎉 You have reached the final quiz 🎉 Keep scrolling to see your
+          results!
+        </div>
+        <Navigate />
+      </>
     )
   }
 
@@ -44,12 +50,14 @@ function scrambleChoices(choices) {
 
 function clickHandler({
   setClicked,
-  id,
+  quiz,
   correct,
   singleQuiz,
   setCorrect,
   choicesContainer,
   correctChoice,
+  quizResults,
+  setQuizResults,
 }) {
   setClicked(true)
   setCorrect(correct)
@@ -63,10 +71,10 @@ function clickHandler({
   })
 
   if (!singleQuiz) {
-    const results =
-      JSON.parse(window.localStorage.getItem('quiz-results')) || {}
-    results[id] = correct
-    window.localStorage.setItem('quiz-results', JSON.stringify(results))
+    const results = quizResults ? [...quizResults] : []
+    results.push({ name: quiz.name, correct })
+
+    setQuizResults(results)
 
     const nextImage = document.querySelector('.quiz-image.lazy:not(.loaded)')
     if (nextImage) {
@@ -121,7 +129,15 @@ function getGrades(correct) {
   })
 }
 
-const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
+const Quiz = ({
+  quiz,
+  showLoading,
+  finalQuiz,
+  singleQuiz,
+  lazy,
+  quizResults,
+  setQuizResults,
+}) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
   const [correct, setCorrect] = useState()
@@ -154,11 +170,13 @@ const Quiz = ({ quiz, showLoading, finalQuiz, singleQuiz, lazy }) => {
                   clickHandler({
                     setClicked,
                     setCorrect,
-                    id: quiz._id,
+                    quiz,
                     correct: choice.correct,
                     singleQuiz,
                     choicesContainer,
                     correctChoice,
+                    quizResults,
+                    setQuizResults,
                   })
                 }
               />
@@ -179,6 +197,8 @@ Quiz.propTypes = {
   finalQuiz: PropTypes.bool,
   singleQuiz: PropTypes.bool,
   lazy: PropTypes.bool,
+  quizResults: PropTypes.any,
+  setQuizResults: PropTypes.func,
 }
 
 export default Quiz

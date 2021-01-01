@@ -5,17 +5,19 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import QuizContainer from './quiz-container'
-// import ResultsPage from './results-page'
+import ResultsPage from './results-page'
 
 import './layout.css'
 
 const Layout = ({ children, quizzes, hideSplash }) => {
+  const [quizResults, setQuizResults] = useState()
+
   const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -44,8 +46,12 @@ const Layout = ({ children, quizzes, hideSplash }) => {
       >
         {children}
       </div>
-      <QuizContainer quizzes={quizzes} />
-      {/* <ResultsPage quizzes={quizzes} /> */}
+      <QuizContainer
+        quizzes={quizzes}
+        quizResults={quizResults}
+        setQuizResults={setQuizResults}
+      />
+      <ResultsPage quizResults={quizResults} />
     </>
   )
 }

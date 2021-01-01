@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Quiz from './quiz'
@@ -15,14 +15,7 @@ function shuffleArray(array) {
   return newArray
 }
 
-function getQuizzes({
-  quizzes: {
-    allQuizzes: { data },
-    quizSize,
-  },
-}) {
-  const quizzes = shuffleArray(data).slice(0, quizSize)
-
+function getQuizzes({ quizzes, quizResults, setQuizResults }) {
   return quizzes.map((quiz, index) => {
     const firstQuiz = index === 0
     const finalQuiz = index === quizzes.length - 1
@@ -33,23 +26,35 @@ function getQuizzes({
         key={quiz.question}
         finalQuiz={finalQuiz}
         lazy={!firstQuiz}
+        quizResults={quizResults}
+        setQuizResults={setQuizResults}
       />
     )
   })
 }
 
-const QuizContainer = ({ quizzes }) => {
+const QuizContainer = ({ quizzes, quizResults, setQuizResults }) => {
   if (!quizzes) return null
+
+  const [randomizedQuizzes, setRandomizedQuizzes] = useState([])
+
+  useEffect(() => {
+    setRandomizedQuizzes(
+      shuffleArray(quizzes.allQuizzes.data).slice(0, quizzes.quizSize)
+    )
+  }, [])
 
   useEffect(() => {
     window.lazyLoadInstance.update()
-  })
+  }, [randomizedQuizzes])
 
-  return getQuizzes({ quizzes })
+  return getQuizzes({ quizzes: randomizedQuizzes, quizResults, setQuizResults })
 }
 
 QuizContainer.propTypes = {
   quizzes: PropTypes.object,
+  quizResults: PropTypes.any,
+  setQuizResults: PropTypes.func,
 }
 
 export default QuizContainer

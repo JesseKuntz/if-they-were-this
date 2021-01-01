@@ -5,14 +5,10 @@ function resizeHandler() {
   document.documentElement.style.setProperty('--vh', `${vh}px`)
 }
 
-function useResizeHandler(callback) {
+function useResizeHandler() {
   useEffect(() => {
     resizeHandler()
     window.addEventListener('resize', resizeHandler)
-
-    if (callback) {
-      callback()
-    }
 
     return () => window.removeEventListener('resize', resizeHandler)
   }, [])

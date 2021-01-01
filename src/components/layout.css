@@ -254,6 +254,71 @@ h1 {
   opacity: 1;
 }
 
+.percentage {
+  font-size: 100px;
+}
+
+.results-container {
+  border: 4px solid hotpink;
+  border-radius: 8px;
+  width: 70%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.results-headers {
+  display: flex;
+  border-bottom: 4px solid hotpink;
+  background-color: rgb(255, 105, 180, 0.2);
+}
+
+.results-header {
+  flex-basis: 50%;
+  font-size: 48px;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.results-header:first-child {
+  border-right: 4px solid hotpink;
+}
+
+.results-body {
+  height: 25vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.results-row {
+  display: flex;
+  align-items: center;
+}
+
+.results-row:not(:last-child) {
+  border-bottom: 4px solid hotpink;
+}
+
+.results-data {
+  padding: 8px;
+  font-size: 24px;
+  flex-basis: 50%;
+}
+
+.results-data:first-child {
+  border-right: 4px solid hotpink;
+}
+
+.results-header-question, .results-name {
+  flex-basis: 80%;
+}
+
+.play-again-button {
+  flex-basis: initial;
+  margin: 20px;
+  width: initial;
+  padding: 8px 20px;
+}
+
 /* Touch Styles */
 @media only screen and (max-width: 480px) {
   html {
@@ -330,6 +395,15 @@ h1 {
 
   .final-quiz {
     margin-bottom: 20px;
+    margin-top: -12px;
+  }
+
+  .results-container {
+    width: 95%;
+  }
+
+  .results-header {
+    font-size: 24px;
   }
 }
 
@@ -381,7 +455,7 @@ h1 {
 
   .final-quiz {
     position: absolute;
-    bottom: 30px;
+    bottom: 10px;
     margin-left: auto;
     margin-right: auto;
     font-size: 24px;

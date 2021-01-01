@@ -28,10 +28,6 @@ const QUIZ_QUERY = gql`
   }
 `
 
-function resetResults() {
-  window.localStorage.setItem('quiz-results', '{}')
-}
-
 function getGenerateQuizzesButtons({ getQuizzes, sizes, setQuizSize }) {
   return sizes.map(size => (
     <GenerateQuizzesButton
@@ -76,7 +72,7 @@ function getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize }) {
 const IndexPage = () => {
   const [quizSize, setQuizSize] = useState()
 
-  useResizeHandler(resetResults)
+  useResizeHandler()
 
   const [getQuizzes, { data: quizzes, loading }] = useLazyQuery(QUIZ_QUERY)
 
