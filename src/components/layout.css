@@ -170,9 +170,7 @@ h1 {
   height: auto;
 }
 
-.grade {
-  position: absolute;
-  font-size: 42px;
+.emoji-sprinkle {
   z-index: -1;
 }
 

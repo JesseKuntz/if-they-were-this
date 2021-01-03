@@ -9,6 +9,7 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import smoothscroll from 'smoothscroll-polyfill'
 import LazyLoad from 'vanilla-lazyload'
+import 'emoji-sprinkle/window'
 
 const client = new ApolloClient({
   uri: 'https://graphql.fauna.com/graphql',

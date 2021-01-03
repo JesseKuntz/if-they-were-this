@@ -9,6 +9,7 @@
     "apollo-boost": "^0.4.9",
     "clipboard-polyfill": "^3.0.1",
     "dotenv": "^8.2.0",
+    "emoji-sprinkle": "^1.1.0",
     "gatsby": "^2.24.79",
     "gatsby-image": "^2.4.21",
     "gatsby-plugin-apollo": "^3.0.2",

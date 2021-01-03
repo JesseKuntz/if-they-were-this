@@ -6,12 +6,6 @@ import Navigate from './navigate'
 import Choice from './choice'
 import Share from './share'
 
-import { getScrollbarWidth } from '../support/get-scrollbar-width'
-
-const EMOJI_COUNT = 100
-const EMOJI_PADDING = 44
-const MAX_FADE = 2
-
 function getBottomElement({ finalQuiz, singleQuiz }) {
   if (singleQuiz) {
     return null
@@ -54,14 +48,12 @@ function clickHandler({
   quiz,
   correct,
   singleQuiz,
-  setCorrect,
   choicesContainer,
   correctChoice,
   quizResults,
   setQuizResults,
 }) {
   setClicked(true)
-  setCorrect(correct)
 
   const gap = window.innerWidth - correctChoice.current.offsetWidth
 
@@ -82,6 +74,10 @@ function clickHandler({
       LazyLoad.load(nextImage)
     }
   }
+
+  if (typeof window !== 'undefined') {
+    window.EmojiSprinkle.sprinkleEmojis({ emoji: correct ? '💋' : '❌' })
+  }
 }
 
 function getImage(src, lazy) {
@@ -92,44 +88,6 @@ function getImage(src, lazy) {
   }
 
   return <img className={baseClass} src={src} />
-}
-
-function getGrades(correct, explosionTriggered, setExplosionTriggered) {
-  if (correct === undefined || explosionTriggered) {
-    return null
-  }
-
-  const scrollbarWidth = getScrollbarWidth()
-
-  const yPositions = Array.from({ length: EMOJI_COUNT }, () =>
-    Math.floor(Math.random() * (window.innerHeight - EMOJI_PADDING))
-  )
-  const xPositions = Array.from({ length: EMOJI_COUNT }, () =>
-    Math.floor(
-      Math.random() * (window.innerWidth - EMOJI_PADDING - scrollbarWidth)
-    )
-  )
-  const fadeValues = Array.from(
-    { length: EMOJI_COUNT },
-    () => Math.random() * MAX_FADE
-  )
-
-  setTimeout(() => setExplosionTriggered(true), MAX_FADE * 1000)
-
-  return yPositions.map((y, index) => {
-    const x = xPositions[index]
-    const fade = fadeValues[index]
-
-    return (
-      <div
-        className="grade"
-        style={{ left: x, top: y, animation: `fade ${fade}s forwards` }}
-        key={`${x}:${y}`}
-      >
-        {correct ? '💋' : '❌'}
-      </div>
-    )
-  })
 }
 
 const Quiz = ({
@@ -143,8 +101,6 @@ const Quiz = ({
 }) => {
   const [clicked, setClicked] = useState()
   const [choices] = useState(scrambleChoices(quiz.choices))
-  const [correct, setCorrect] = useState()
-  const [explosionTriggered, setExplosionTriggered] = useState(false)
   const choicesContainer = useRef(null)
   const correctChoice = useRef(null)
 
@@ -173,7 +129,6 @@ const Quiz = ({
                 clickHandler={() =>
                   clickHandler({
                     setClicked,
-                    setCorrect,
                     quiz,
                     correct: choice.correct,
                     singleQuiz,
@@ -189,8 +144,6 @@ const Quiz = ({
       </div>
 
       {getBottomElement({ showLoading, finalQuiz, singleQuiz })}
-
-      {getGrades(correct, explosionTriggered, setExplosionTriggered)}
     </div>
   )
 }
