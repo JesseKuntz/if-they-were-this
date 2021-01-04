@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import Navigate from './navigate'
+import Navigate from './navigate';
 
 function getQuizRows(quizResults) {
   return quizResults.map(result => {
@@ -10,23 +10,23 @@ function getQuizRows(quizResults) {
         <div className="results-data results-name">{result.name}</div>
         <div className="results-data">{result.correct ? '✅' : '❌'}</div>
       </div>
-    )
-  })
+    );
+  });
 }
 
 function clickHandler() {
-  window.location.reload()
+  window.location.reload();
 }
 
 function ResultsPage({ quizResults }) {
   if (!quizResults) {
-    return null
+    return null;
   }
 
-  const correctAnswers = quizResults.filter(result => result.correct)
+  const correctAnswers = quizResults.filter(result => result.correct);
   const percentageCorrect = Math.floor(
     (correctAnswers.length / quizResults.length) * 100
-  )
+  );
 
   return (
     <div className="scroll-piece">
@@ -48,11 +48,11 @@ function ResultsPage({ quizResults }) {
         Play Again
       </button>
     </div>
-  )
+  );
 }
 
 ResultsPage.propTypes = {
   quizResults: PropTypes.any,
-}
+};
 
-export default ResultsPage
+export default ResultsPage;

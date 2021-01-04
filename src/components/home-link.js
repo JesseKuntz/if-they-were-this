@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import { Link } from 'gatsby'
+import { Link } from 'gatsby';
 
-import StarIconImage from '../images/icon.svg'
+import StarIconImage from '../images/icon.svg';
 
 const HomeLink = () => (
   <div className="icon-container">
@@ -10,6 +10,6 @@ const HomeLink = () => (
       <img src={StarIconImage} className="home-link" />
     </Link>
   </div>
-)
+);
 
-export default HomeLink
+export default HomeLink;

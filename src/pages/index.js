@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { useLazyQuery } from 'react-apollo'
-import { gql } from 'apollo-boost'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useLazyQuery } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import GenerateQuizzesButton from '../components/generate-quizzes-button'
-import Navigate from '../components/navigate'
+import Layout from '../components/layout';
+import SEO from '../components/seo';
+import GenerateQuizzesButton from '../components/generate-quizzes-button';
+import Navigate from '../components/navigate';
 
-import StarIconImage from '../images/icon.svg'
+import StarIconImage from '../images/icon.svg';
 
-import { useResizeHandler } from '../support/use-resize-handler'
+import { useResizeHandler } from '../support/use-resize-handler';
 
-const QUIZ_SIZES = [10, 25, 50, 100]
+const QUIZ_SIZES = [10, 25, 50, 100];
 
 const QUIZ_QUERY = gql`
   query Quizzes {
@@ -26,7 +26,7 @@ const QUIZ_QUERY = gql`
       }
     }
   }
-`
+`;
 
 function getGenerateQuizzesButtons({ getQuizzes, sizes, setQuizSize }) {
   return sizes.map(size => (
@@ -36,12 +36,12 @@ function getGenerateQuizzesButtons({ getQuizzes, sizes, setQuizSize }) {
       setQuizSize={setQuizSize}
       key={size}
     />
-  ))
+  ));
 }
 
 function getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize }) {
   if (loading) {
-    return <img src={StarIconImage} className="loading-indicator" />
+    return <img src={StarIconImage} className="loading-indicator" />;
   }
 
   if (quizzes) {
@@ -50,7 +50,7 @@ function getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize }) {
         <div className="text">Your quiz awaits, scroll away!</div>
         <Navigate start={true} />
       </>
-    )
+    );
   }
 
   return (
@@ -66,22 +66,22 @@ function getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize }) {
         })}
       </div>
     </>
-  )
+  );
 }
 
 const IndexPage = () => {
-  const [quizSize, setQuizSize] = useState()
+  const [quizSize, setQuizSize] = useState();
 
-  useResizeHandler()
+  useResizeHandler();
 
-  const [getQuizzes, { data: quizzes, loading }] = useLazyQuery(QUIZ_QUERY)
+  const [getQuizzes, { data: quizzes, loading }] = useLazyQuery(QUIZ_QUERY);
 
-  let quizData
+  let quizData;
   if (quizzes) {
     quizData = {
       ...quizzes,
       quizSize,
-    }
+    };
   }
 
   return (
@@ -93,11 +93,11 @@ const IndexPage = () => {
       </div>
       {getDynamicSection({ loading, quizzes, getQuizzes, setQuizSize })}
     </Layout>
-  )
-}
+  );
+};
 
 IndexPage.propTypes = {
   data: PropTypes.object,
-}
+};
 
-export default IndexPage
+export default IndexPage;

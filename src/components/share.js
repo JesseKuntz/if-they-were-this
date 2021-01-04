@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import * as clipboard from 'clipboard-polyfill/text'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import * as clipboard from 'clipboard-polyfill/text';
 
-import { slugify } from '../support/slugify'
+import { slugify } from '../support/slugify';
 
 function clickHandler(name, setCopied) {
-  const textToWrite = `${window.location.href}quiz/${slugify(name)}`
+  const textToWrite = `${window.location.href}quiz/${slugify(name)}`;
 
-  clipboard.writeText(textToWrite)
+  clipboard.writeText(textToWrite);
 
-  setCopied(true)
+  setCopied(true);
 
   window.setTimeout(() => {
-    setCopied(false)
-  }, 1000)
+    setCopied(false);
+  }, 1000);
 }
 
 function getClass(copied) {
-  const baseClass = 'copy-message'
+  const baseClass = 'copy-message';
 
   if (copied) {
-    return `${baseClass} show`
+    return `${baseClass} show`;
   }
 
-  return baseClass
+  return baseClass;
 }
 
 function Share({ name }) {
-  const [copied, setCopied] = useState()
+  const [copied, setCopied] = useState();
 
   return (
     <div className="icon-container">
@@ -47,11 +47,11 @@ function Share({ name }) {
       </div>
       <div className={getClass(copied)}>Link Copied!</div>
     </div>
-  )
+  );
 }
 
 Share.propTypes = {
   name: PropTypes.string,
-}
+};
 
-export default Share
+export default Share;

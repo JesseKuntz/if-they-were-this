@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react'
-import PropTypes from 'prop-types'
-import LazyLoad from 'vanilla-lazyload'
+import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
+import LazyLoad from 'vanilla-lazyload';
 
-import Navigate from './navigate'
-import Choice from './choice'
-import Share from './share'
+import Navigate from './navigate';
+import Choice from './choice';
+import Share from './share';
 
 function getBottomElement({ finalQuiz, singleQuiz }) {
   if (singleQuiz) {
-    return null
+    return null;
   }
 
   if (finalQuiz) {
@@ -20,27 +20,27 @@ function getBottomElement({ finalQuiz, singleQuiz }) {
         </div>
         <Navigate />
       </>
-    )
+    );
   }
 
-  return <Navigate />
+  return <Navigate />;
 }
 
 function getImageSrc(url) {
-  const newUrl = url.replace('http', 'https')
-  return newUrl.replace(/\/v.+?\//g, `/e_trim/`)
+  const newUrl = url.replace('http', 'https');
+  return newUrl.replace(/\/v.+?\//g, `/e_trim/`);
 }
 
 function scrambleChoices(choices) {
   const choicesWithData = choices.map((choice, index) => ({
     text: choice,
     correct: index === 0,
-  }))
+  }));
 
   return choicesWithData
     .map(a => ({ sort: Math.random(), value: a }))
     .sort((a, b) => a.sort - b.sort)
-    .map(a => a.value)
+    .map(a => a.value);
 }
 
 function clickHandler({
@@ -53,41 +53,41 @@ function clickHandler({
   quizResults,
   setQuizResults,
 }) {
-  setClicked(true)
+  setClicked(true);
 
-  const gap = window.innerWidth - correctChoice.current.offsetWidth
+  const gap = window.innerWidth - correctChoice.current.offsetWidth;
 
   choicesContainer.current.scrollTo({
     top: 0,
     left: correctChoice.current.offsetLeft - gap / 2,
     behavior: 'smooth',
-  })
+  });
 
   if (!singleQuiz) {
-    const results = quizResults ? [...quizResults] : []
-    results.push({ name: quiz.name, correct })
+    const results = quizResults ? [...quizResults] : [];
+    results.push({ name: quiz.name, correct });
 
-    setQuizResults(results)
+    setQuizResults(results);
 
-    const nextImage = document.querySelector('.quiz-image.lazy:not(.loaded)')
+    const nextImage = document.querySelector('.quiz-image.lazy:not(.loaded)');
     if (nextImage) {
-      LazyLoad.load(nextImage)
+      LazyLoad.load(nextImage);
     }
   }
 
   if (typeof window !== 'undefined') {
-    window.EmojiSprinkle.sprinkleEmojis({ emoji: correct ? '💋' : '❌' })
+    window.EmojiSprinkle.sprinkleEmojis({ emoji: correct ? '💋' : '❌' });
   }
 }
 
 function getImage(src, lazy) {
-  const baseClass = 'quiz-image'
+  const baseClass = 'quiz-image';
 
   if (lazy) {
-    return <img className={`${baseClass} lazy`} data-src={src} />
+    return <img className={`${baseClass} lazy`} data-src={src} />;
   }
 
-  return <img className={baseClass} src={src} />
+  return <img className={baseClass} src={src} />;
 }
 
 const Quiz = ({
@@ -99,10 +99,10 @@ const Quiz = ({
   quizResults,
   setQuizResults,
 }) => {
-  const [clicked, setClicked] = useState()
-  const [choices] = useState(scrambleChoices(quiz.choices))
-  const choicesContainer = useRef(null)
-  const correctChoice = useRef(null)
+  const [clicked, setClicked] = useState();
+  const [choices] = useState(scrambleChoices(quiz.choices));
+  const choicesContainer = useRef(null);
+  const correctChoice = useRef(null);
 
   return (
     <div className="scroll-piece quiz" id={quiz._id}>
@@ -145,8 +145,8 @@ const Quiz = ({
 
       {getBottomElement({ showLoading, finalQuiz, singleQuiz })}
     </div>
-  )
-}
+  );
+};
 
 Quiz.propTypes = {
   quiz: PropTypes.object.isRequired,
@@ -156,6 +156,6 @@ Quiz.propTypes = {
   lazy: PropTypes.bool,
   quizResults: PropTypes.any,
   setQuizResults: PropTypes.func,
-}
+};
 
-export default Quiz
+export default Quiz;

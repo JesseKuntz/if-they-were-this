@@ -5,18 +5,18 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
 
-import Header from './header'
-import QuizContainer from './quiz-container'
-import ResultsPage from './results-page'
+import Header from './header';
+import QuizContainer from './quiz-container';
+import ResultsPage from './results-page';
 
-import './layout.css'
+import './layout.css';
 
 const Layout = ({ children, quizzes, hideSplash }) => {
-  const [quizResults, setQuizResults] = useState()
+  const [quizResults, setQuizResults] = useState();
 
   const siteData = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -26,7 +26,7 @@ const Layout = ({ children, quizzes, hideSplash }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
@@ -53,13 +53,13 @@ const Layout = ({ children, quizzes, hideSplash }) => {
       />
       <ResultsPage quizResults={quizResults} />
     </>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   quizzes: PropTypes.object,
   hideSplash: PropTypes.bool,
-}
+};
 
-export default Layout
+export default Layout;

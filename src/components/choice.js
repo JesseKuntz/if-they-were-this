@@ -1,18 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function getClass(clicked, correct) {
-  const baseClass = 'choice'
+  const baseClass = 'choice';
 
   if (clicked) {
     if (correct) {
-      return `${baseClass} clicked correct`
+      return `${baseClass} clicked correct`;
     }
 
-    return `${baseClass} clicked incorrect`
+    return `${baseClass} clicked incorrect`;
   }
 
-  return baseClass
+  return baseClass;
 }
 
 function Choice({ choice, clicked, setClicked, clickHandler, refToUse }) {
@@ -26,7 +26,7 @@ function Choice({ choice, clicked, setClicked, clickHandler, refToUse }) {
       >
         {choice.text}
       </button>
-    )
+    );
   }
 
   return (
@@ -37,7 +37,7 @@ function Choice({ choice, clicked, setClicked, clickHandler, refToUse }) {
     >
       {choice.text}
     </button>
-  )
+  );
 }
 
 Choice.propTypes = {
@@ -46,6 +46,6 @@ Choice.propTypes = {
   setClicked: PropTypes.func,
   clickHandler: PropTypes.func.isRequired,
   refToUse: PropTypes.object,
-}
+};
 
-export default Choice
+export default Choice;
