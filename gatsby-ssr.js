@@ -4,9 +4,9 @@
  * See: https://www.gatsbyjs.com/docs/ssr-apis/
  */
 
-import React from 'react'
-import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo'
+import React from 'react';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
 const client = new ApolloClient({
   uri: 'https://graphql.fauna.com/graphql',
@@ -15,12 +15,12 @@ const client = new ApolloClient({
       headers: {
         Authorization: `Bearer ${process.env.GATSBY_FAUNA_CLIENT_SECRET}`,
       },
-    })
+    });
   },
-})
+});
 
 const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>{element}</ApolloProvider>
-)
+);
 
-export { wrapRootElement }
+export { wrapRootElement };

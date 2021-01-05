@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
 
-const { slugify } = require('./src/support/slugify')
+const { slugify } = require('./src/support/slugify');
 
 async function createPages({ actions, graphql }) {
   const { data } = await graphql(`
@@ -21,17 +21,17 @@ async function createPages({ actions, graphql }) {
         }
       }
     }
-  `)
+  `);
 
   data.fauna.allQuizzes.data.forEach(quiz => {
-    const slug = slugify(quiz.name)
+    const slug = slugify(quiz.name);
 
     actions.createPage({
       path: `/quiz/${slug}`.replace(/\/\/+/g, '/'),
       component: require.resolve(`./src/components/quiz-page.js`),
       context: quiz,
-    })
-  })
+    });
+  });
 }
 
-exports.createPages = createPages
+exports.createPages = createPages;
