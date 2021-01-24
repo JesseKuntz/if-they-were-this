@@ -22,6 +22,7 @@ const QUIZ_QUERY = gql`
         choices
         image
         name
+        disabled
         _id
       }
     }

@@ -39,8 +39,12 @@ const QuizContainer = ({ quizzes, quizResults, setQuizResults }) => {
   const [randomizedQuizzes, setRandomizedQuizzes] = useState([]);
 
   useEffect(() => {
+    const enabledQuizzes = quizzes.allQuizzes.data.filter(quiz => {
+      return !quiz.disabled;
+    });
+
     setRandomizedQuizzes(
-      shuffleArray(quizzes.allQuizzes.data).slice(0, quizzes.quizSize)
+      shuffleArray(enabledQuizzes).slice(0, quizzes.quizSize)
     );
   }, []);
 
