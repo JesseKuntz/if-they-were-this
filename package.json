@@ -7,6 +7,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.4",
     "apollo-boost": "^0.4.9",
+    "apollo3-cache-persist": "^0.9.1",
     "clipboard-polyfill": "^3.0.1",
     "dotenv": "^8.2.0",
     "emoji-sprinkle": "^1.1.0",
