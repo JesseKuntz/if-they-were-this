@@ -28,7 +28,7 @@ function getBottomElement({ finalQuiz, singleQuiz }) {
 
 function getImageSrc(url) {
   const newUrl = url.replace('http', 'https');
-  return newUrl.replace(/\/v.+?\//g, `/e_trim/`);
+  return newUrl.replace(/\/v.+?\//g, `/h_400,e_trim/`);
 }
 
 function scrambleChoices(choices) {
