@@ -20,8 +20,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `If They Were This`,
+        short_name: `If They Were This`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
