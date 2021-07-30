@@ -11,7 +11,7 @@ const Header = ({ siteTitle }) => (
     }}
     className="scroll-piece"
   >
-    <Navigate />
+    <Navigate start={true} />
     <div
       style={{
         margin: `0 auto`,
