@@ -39,7 +39,6 @@ const Layout = ({ children, quizzes, hideSplash }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
           padding: `0 20px`,
         }}
         className="scroll-piece"

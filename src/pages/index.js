@@ -7,6 +7,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import GenerateQuizzesButton from '../components/generate-quizzes-button';
 import Navigate from '../components/navigate';
+import Settings from '../components/settings';
 
 import StarIconImage from '../images/icon.svg';
 
@@ -88,6 +89,7 @@ const IndexPage = () => {
   return (
     <Layout quizzes={quizData}>
       <SEO />
+      <Settings />
       <div className="text">
         <span className="bold-brand">If They Were This</span> is a celebrity
         quiz game.

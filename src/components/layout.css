@@ -52,6 +52,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 960px;
   justify-content: space-evenly;
 }
 
@@ -225,7 +226,7 @@ h1 {
   cursor: pointer;
 }
 
-.share-icon {
+.icon {
   color: white;
 }
 
@@ -317,6 +318,40 @@ h1 {
   padding: 8px 20px;
 }
 
+.settings {
+  position: absolute;
+  background-color: hotpink;
+  color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.settings-close {
+  font-size: 48px;
+  position: absolute;
+  top: 24px;
+  left: 34px;
+}
+
+.settings .text {
+  padding: 0px 20px;
+}
+
+.settings button {
+  background-color: white;
+  color: hotpink;
+  width: initial;
+  margin-top: 20px;
+  flex-basis: initial;
+}
+
 /* Touch Styles */
 @media only screen and (max-width: 480px) {
   html {
@@ -403,6 +438,10 @@ h1 {
   .results-header {
     font-size: 24px;
   }
+
+  .icon-container.settings-icon {
+    top: 20px;
+  }
 }
 
 /* Touch Styles on a Longer Device */
@@ -462,5 +501,11 @@ h1 {
   .icon-container {
     top: 40px;
     left: 40px;
+  }
+
+  .settings-close {
+    top: 44px;
+    left: 54px;
+    cursor: pointer;
   }
 }
