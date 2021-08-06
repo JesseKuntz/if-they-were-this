@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-function clearCacheClickHandler(open, setOpen) {
-  localStorage.removeItem('apollo-cache-persist');
-  setOpen(!open);
+function clearCacheClickHandler() {
+  window.localStorage.removeItem('apollo-cache-persist');
+  window.location.reload();
 }
 
 function getSettingsModal(open, setOpen) {
