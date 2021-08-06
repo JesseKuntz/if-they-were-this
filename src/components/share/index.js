@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as clipboard from 'clipboard-polyfill/text';
 
-import { slugify } from '../support/slugify';
+import { slugify } from '../../support/slugify';
 
 function clickHandler(name, setCopied) {
   const textToWrite = `${window.location.href}quiz/${slugify(name)}`;

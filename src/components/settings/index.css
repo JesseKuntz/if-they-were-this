@@ -1,0 +1,33 @@
+.settings {
+  position: absolute;
+  background-color: hotpink;
+  color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.settings-close {
+  font-size: 48px;
+  position: absolute;
+  top: 24px;
+  left: 34px;
+}
+
+.settings .text {
+  padding: 0px 20px;
+}
+
+.settings button {
+  background-color: white;
+  color: hotpink;
+  width: initial;
+  margin-top: 20px;
+  flex-basis: initial;
+}

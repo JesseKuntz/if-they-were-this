@@ -5,7 +5,7 @@ import SEO from './seo';
 import Quiz from './quiz';
 import HomeLink from './home-link';
 
-import './layout.css';
+import './index.css';
 
 import { useResizeHandler } from '../support/use-resize-handler';
 

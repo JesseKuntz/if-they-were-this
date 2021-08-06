@@ -37,10 +37,7 @@ h1 {
   font-size: 200px;
   text-align: center;
   margin: 0;
-}
-
-.sparkle {
- color: white;
+  color: white;
 }
 
 .text {
@@ -106,35 +103,6 @@ h1 {
   flex-direction: column;
 }
 
-.navigate-arrow {
-  position: absolute;
-  left: 0;
-  right: 0;
-  font-size: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.navigate-arrow.up {
-  top: 30px;
-}
-
-.navigate-arrow.down {
-  bottom: 30px;
-  transform: scale(1, -1);
-}
-
-.scroll-piece:last-child .navigate-arrow.down {
-  display: none;
-}
-
-.scroll-piece:nth-child(2) .navigate-arrow.down {
-  color: white;
-}
-
 .loading-indicator {
   position: absolute;
   left: 0;
@@ -164,13 +132,6 @@ h1 {
   }
 }
 
-.quiz-image {
-  object-fit: contain;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-}
-
 .emoji-sprinkle {
   z-index: -1;
 }
@@ -178,52 +139,6 @@ h1 {
 @keyframes fade {
   0%,100% { opacity: 0 }
   50% { opacity: 1 }
-}
-
-.choice {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 20px;
-  border: 4px solid hotpink;
-  border-radius: 8px;
-  padding: 6px;
-  margin: 0 8px 8px 0;
-  font-family: 'SF Hollywood Hills';
-  background-color: white;
-  line-height: 1;
-  letter-spacing: 2px;
-}
-
-.choice.clicked.correct {
-  /* background-color: rgb(0, 255, 0, 0.2); */
-  background-color: hotpink;
-  color: white;
-}
-
-.choice.clicked.incorrect {
-  /* background-color: rgb(255, 0, 0, 0.2); */
-  background-color: rgb(255, 105, 180, 0.2);
-}
-
-.choice:disabled {
-  color: black;
-}
-
-.home-link {
-  width: 52px;
-  height: 52px;
-  cursor: pointer;
-}
-
-.share {
-  width: 32px;
-  height: 32px;
-  background: hotpink;
-  padding: 10px;
-  border-radius: 100%;
-  cursor: pointer;
 }
 
 .icon {
@@ -238,79 +153,6 @@ h1 {
   align-items: center;
 }
 
-.copy-message {
-  background: white;
-  line-height: 52px;
-  padding: 0 10px;
-  border: 2px solid hotpink;
-  border-radius: 10px;
-  opacity: 0;
-  cursor: default;
-  transition: opacity 0.5s;
-}
-
-.show {
-  opacity: 1;
-}
-
-.percentage {
-  font-size: 100px;
-}
-
-.results-container {
-  border: 4px solid hotpink;
-  border-radius: 8px;
-  width: 50%;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.results-headers {
-  display: flex;
-  border-bottom: 4px solid hotpink;
-  background-color: rgb(255, 105, 180, 0.2);
-}
-
-.results-header {
-  flex-basis: 50%;
-  font-size: 48px;
-  padding: 8px;
-  font-weight: bold;
-}
-
-.results-header:first-child {
-  border-right: 4px solid hotpink;
-}
-
-.results-body {
-  height: 25vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.results-row {
-  display: flex;
-  align-items: center;
-}
-
-.results-row:not(:last-child) {
-  border-bottom: 4px solid hotpink;
-}
-
-.results-data {
-  padding: 8px;
-  font-size: 24px;
-  flex-basis: 50%;
-}
-
-.results-data:first-child {
-  border-right: 4px solid hotpink;
-}
-
-.results-header-question, .results-name {
-  flex-basis: 80%;
-}
-
 .play-again-button {
   flex-basis: initial;
   margin: 20px;
@@ -318,39 +160,6 @@ h1 {
   padding: 8px 20px;
 }
 
-.settings {
-  position: absolute;
-  background-color: hotpink;
-  color: white;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-}
-
-.settings-close {
-  font-size: 48px;
-  position: absolute;
-  top: 24px;
-  left: 34px;
-}
-
-.settings .text {
-  padding: 0px 20px;
-}
-
-.settings button {
-  background-color: white;
-  color: hotpink;
-  width: initial;
-  margin-top: 20px;
-  flex-basis: initial;
-}
 
 /* Touch Styles */
 @media only screen and (max-width: 480px) {

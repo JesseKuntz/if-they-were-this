@@ -1,0 +1,28 @@
+.navigate-arrow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.navigate-arrow.up {
+  top: 30px;
+}
+
+.navigate-arrow.down {
+  bottom: 30px;
+  transform: scale(1, -1);
+}
+
+.scroll-piece:last-child .navigate-arrow.down {
+  display: none;
+}
+
+.scroll-piece:nth-child(2) .navigate-arrow.down {
+  color: white;
+}

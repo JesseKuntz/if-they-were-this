@@ -13,7 +13,7 @@ import Header from './header';
 import QuizContainer from './quiz-container';
 import ResultsPage from './results-page';
 
-import './layout.css';
+import './index.css';
 
 const Layout = ({ children, quizzes, hideSplash }) => {
   const [quizResults, setQuizResults] = useState();

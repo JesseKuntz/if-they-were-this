@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'vanilla-lazyload';
 
-import Navigate from './navigate';
-import Choice from './choice';
-import Share from './share';
+import Navigate from '../navigate';
+import Choice from '../choice';
+import Share from '../share';
 
 function getBottomElement({ finalQuiz, singleQuiz }) {
   if (singleQuiz) {

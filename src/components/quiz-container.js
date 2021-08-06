@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Quiz from './quiz';
-import './layout.css';
+import './index.css';
 
 function shuffleArray(array) {
   const newArray = [...array];

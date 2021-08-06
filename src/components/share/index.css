@@ -1,0 +1,23 @@
+.share {
+  width: 32px;
+  height: 32px;
+  background: hotpink;
+  padding: 10px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.copy-message {
+  background: white;
+  line-height: 52px;
+  padding: 0 10px;
+  border: 2px solid hotpink;
+  border-radius: 10px;
+  opacity: 0;
+  cursor: default;
+  transition: opacity 0.5s;
+}
+
+.show {
+  opacity: 1;
+}
