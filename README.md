@@ -7,7 +7,7 @@
   If They Were This
 </h1>
 
-### [👉 Full Project Description 👈](http://localhost:8080/?project=if-they-were-this)
+### [👉 Full Project Description 👈](https://jessekuntz.github.io/?project=if-they-were-this)
 
 ## Running Things
 
