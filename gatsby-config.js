@@ -46,5 +46,6 @@ module.exports = {
         uri: 'https://example.com/graphql',
       },
     },
+    'gatsby-plugin-netlify',
   ],
 };
