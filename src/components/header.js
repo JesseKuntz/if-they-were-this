@@ -1,6 +1,5 @@
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Navigate from './navigate';
 
@@ -21,7 +20,7 @@ const Header = ({ siteTitle }) => (
     >
       <h1>
         <Link
-          to="/"
+          href="/"
           style={{
             color: `white`,
             textDecoration: `none`,

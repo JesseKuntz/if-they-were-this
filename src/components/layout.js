@@ -1,41 +1,21 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
 import QuizContainer from './quiz-container';
 import ResultsPage from './results-page';
 
-import './index.css';
+const SITE_TITLE = 'If They Were This';
 
 const Layout = ({ children, quizzes, hideSplash }) => {
   const [quizResults, setQuizResults] = useState();
-
-  const siteData = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
 
   return (
     <>
       <div className="turn text">
         Please turn the screen back to portrait mode to keep playing!
       </div>
-      {!hideSplash && (
-        <Header siteTitle={siteData.site.siteMetadata?.title || `Title`} />
-      )}
+      {!hideSplash && <Header siteTitle={SITE_TITLE} />}
       <div
         style={{
           margin: `0 auto`,

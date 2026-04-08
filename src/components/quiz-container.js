@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Quiz from './quiz';
-import './index.css';
 
 function shuffleArray(array) {
   const newArray = [...array];
@@ -34,23 +33,26 @@ function getQuizzes({ quizzes, quizResults, setQuizResults }) {
 }
 
 const QuizContainer = ({ quizzes, quizResults, setQuizResults }) => {
-  if (!quizzes) return null;
-
   const [randomizedQuizzes, setRandomizedQuizzes] = useState([]);
 
   useEffect(() => {
-    const enabledQuizzes = quizzes.allQuizzes.data.filter(quiz => {
-      return !quiz.disabled;
-    });
+    if (!quizzes) return;
 
+    const enabledQuizzes = quizzes.data.filter(quiz => !quiz.disabled);
     setRandomizedQuizzes(
       shuffleArray(enabledQuizzes).slice(0, quizzes.quizSize)
     );
-  }, []);
+  }, [quizzes]);
 
   useEffect(() => {
-    window.lazyLoadInstance.update();
+    if (randomizedQuizzes.length === 0) return;
+
+    if (window.lazyLoadInstance) {
+      window.lazyLoadInstance.update();
+    }
   }, [randomizedQuizzes]);
+
+  if (!quizzes) return null;
 
   return getQuizzes({
     quizzes: randomizedQuizzes,

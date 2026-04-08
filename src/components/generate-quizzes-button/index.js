@@ -1,14 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-function GenerateQuizzesButton({ getQuizzes, size, setQuizSize }) {
+function GenerateQuizzesButton({ fetchQuizzes, size }) {
   return (
     <button
       className="main-button"
-      onClick={() => {
-        getQuizzes({ variables: { size } });
-        setQuizSize(size);
-      }}
+      onClick={() => fetchQuizzes(size)}
     >
       {size}
     </button>
@@ -16,9 +12,8 @@ function GenerateQuizzesButton({ getQuizzes, size, setQuizSize }) {
 }
 
 GenerateQuizzesButton.propTypes = {
-  getQuizzes: PropTypes.func,
+  fetchQuizzes: PropTypes.func,
   size: PropTypes.number,
-  setQuizSize: PropTypes.func,
 };
 
 export default GenerateQuizzesButton;

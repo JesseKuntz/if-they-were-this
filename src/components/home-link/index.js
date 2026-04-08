@@ -1,13 +1,9 @@
-import React from 'react';
-
-import { Link } from 'gatsby';
-
-import StarIconImage from '../../images/icon.svg';
+import Link from 'next/link';
 
 const HomeLink = () => (
   <div className="icon-container">
-    <Link to="/">
-      <img src={StarIconImage} className="home-link" />
+    <Link href="/">
+      <img src="/icon.svg" className="home-link" alt="Home" />
     </Link>
   </div>
 );

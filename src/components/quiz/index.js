@@ -84,10 +84,10 @@ function getImage(src, lazy) {
   const baseClass = 'quiz-image';
 
   if (lazy) {
-    return <img className={`${baseClass} lazy`} data-src={src} />;
+    return <img className={`${baseClass} lazy`} data-src={src} alt="" />;
   }
 
-  return <img className={baseClass} src={src} />;
+  return <img className={baseClass} src={src} alt="" />;
 }
 
 const Quiz = ({

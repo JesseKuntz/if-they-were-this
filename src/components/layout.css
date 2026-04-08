@@ -1,8 +1,8 @@
 @font-face {
   font-family: "SF Hollywood Hills";
-  src: url('../../static/fonts/hollywood/SFHollywoodHills.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../../static/fonts/hollywood/SFHollywoodHills.woff') format('woff'), /* Pretty Modern Browsers */
-       url('../../static/fonts/hollywood/SFHollywoodHills.ttf') format('truetype'); /* Safari, Android, iOS */
+  src: url('/fonts/hollywood/SFHollywoodHills.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/hollywood/SFHollywoodHills.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/hollywood/SFHollywoodHills.ttf') format('truetype'); /* Safari, Android, iOS */
   font-weight: normal;
   font-style: normal;
 }
